@@ -1,0 +1,7 @@
+<group>
+	<group/>
+	<PointLight>1</PointLight>
+	<SpotLight>1</SpotLight>
+	<DirectionalLight>1</DirectionalLight>
+	<Use_Texture>1</Use_Texture>
+</group>

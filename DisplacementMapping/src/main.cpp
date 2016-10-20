@@ -5,7 +5,7 @@
 int main( ){
 
     ofGLWindowSettings settings;
-    settings.setGLVersion(4, 1);
+    settings.setGLVersion(3, 3);
     ofCreateWindow(settings);
     
     

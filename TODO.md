@@ -1,16 +1,13 @@
 #TODO List
 
 - Add keycommands display to PhongShading
+- Define variable names for all!
 - Add clone_addons.sh
-- Check 4.1 with PhongExamples
-- Git init
-- Add ShaderManager to addon, or make it common
+
+Addons: ofxShadersFX, ofxCubeMap
 
 ## To add 
 - Geometry shaders
-- Environment/cub mapping ?
 - Shadows
-- Reflection and refraction ?
 - Tesselation
-- Shadows
 - BRDF

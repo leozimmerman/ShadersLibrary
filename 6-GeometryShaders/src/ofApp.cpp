@@ -10,45 +10,17 @@ void ofApp::setup(){
     ofSetVerticalSync(true);
 	ofSetFrameRate(60);
     ofBackground(40);
-    
-    setupLights();
-    
-    
-    
-    ofShader* shader = shaderManager.shader();
-    shader->setGeometryInputType(GL_TRIANGLES);//GL_POINTS, GL_TRIANGLES
-    shader->setGeometryOutputType(GL_LINE_STRIP);//GL_TRIANGLE_STRIP
-    shader->setGeometryOutputCount(6);
-    shader->load("normals.vert", "normals.frag", "normals.geom");
-    
-    
+  
+    shaderManager.setGeometryShader('0');
     shaderManager.useLight(&spotLight);
     shaderManager.useLight(&directionalLight);
     shaderManager.useLight(&pointLight);
     shaderManager.useMaterial(&material);
     shaderManager.useCamera(&cam);
     
-    //--------------------------------
-    
-    ofSetSphereResolution(128);
-    radius		= 180.f;
-    center.set(0, 0, 0);
-    
-    sphere.setRadius(radius);
-    ofVboMesh sphereMesh = sphere.getMesh();
-    sphereVbo = sphereMesh.getVbo();
-    
-    box.set(850);
-    ofVboMesh boxMesh = box.getMesh();
-    boxVbo = boxMesh.getVbo();
-    
-    cylinder.set(70, 150);
-    ofVboMesh cylinderMesh = cylinder.getMesh();
-    cylinderVbo = cylinderMesh.getVbo();
-    
-    //------------------------
+    setupVbos();
+    setupLights();
     setupGui();
-    
 
 }
 
@@ -87,69 +59,17 @@ void ofApp::draw(){
     gui.draw();
     ofDrawBitmapString(shaderManager.shaderName(), 20, ofGetHeight()-30);
 }
+//--------------------------------------------------------------
+void ofApp::exit() {
 
+}
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
-    ofShader* shader = shaderManager.shader();
-    
-    switch (key) {
-        case ' ':
-//            cout<<"*************************************"<<endl;
-//            cout<<"RELOAD:"<<endl;
-//            shaderManager.shader()->load("normals.vert", "normals.frag", "normals.geom");
-//            break;
-        
-        case '0':
-            shader->unload();
-            shader->setGeometryInputType(GL_TRIANGLES);
-            shader->setGeometryOutputType(GL_TRIANGLE_STRIP);
-            shader->setGeometryOutputCount(3);
-            shader->load("passthrough.vert", "passthrough.frag", "passthrough.geom");
-            currentInputType = GL_TRIANGLES;
-            break;
-        
-        case '1':
-            shader->unload();
-            shader->setGeometryInputType(GL_TRIANGLES);
-            shader->setGeometryOutputType(GL_TRIANGLE_STRIP);
-            shader->setGeometryOutputCount(6);
-            shader->load("duplicate.vert", "duplicate.frag", "duplicate.geom");
-            currentInputType = GL_TRIANGLES;
-            break;
-        
-        case '2':
-            shader->unload();
-            shader->setGeometryInputType(GL_POINTS);
-            shader->setGeometryOutputType(GL_TRIANGLE_STRIP);
-            shader->setGeometryOutputCount(24);
-            shader->load("cubes.vert", "cubes.frag", "cubes.geom");
-            currentInputType = GL_POINTS;
-            break;
-        
-        case '3':
-            shader->unload();
-            shader->setGeometryInputType(GL_LINES);
-            shader->setGeometryOutputType(GL_TRIANGLE_STRIP);
-            shader->setGeometryOutputCount(24);
-            shader->load("cubelines.vert", "cubelines.frag", "cubelines.geom");
-            currentInputType = GL_LINES;
-            break;
-        
-        case '4':
-            shader->unload();
-            shader->setGeometryInputType(GL_TRIANGLES);//GL_POINTS, GL_TRIANGLES
-            shader->setGeometryOutputType(GL_LINE_STRIP);//GL_TRIANGLE_STRIP
-            shader->setGeometryOutputCount(6);
-            shader->load("normals.vert", "normals.frag", "normals.geom");
-            currentInputType = GL_TRIANGLES;
-            break;
-        
 
-		default:
-			break;
-	}
+    shaderManager.setGeometryShader(key);
+
 }
+
 
 
 //--------------------------------------------------------------
@@ -161,25 +81,64 @@ void ofApp::drawScene(){
     ofSetColor(255, 255, 255, 255);
     ofPushMatrix();
     ofTranslate(center.x, center.y, center.z-300);
-    ofRotate(ofGetElapsedTimef() * .8 * RAD_TO_DEG, 0, 1, 0);
-    sphereVbo.draw(currentInputType, 0, sphereVbo.getNumIndices());
+    
+    //Dont rotate with duplicate shader, cause it translates with a matrix mult.
+    if(shaderManager.shaderName() != "duplicate")
+        ofRotate(ofGetElapsedTimef() * .8 * RAD_TO_DEG, 0, 1, 0);
+    
+    sphereVbo.drawElements(shaderManager.getGLInputType(),  sphereVbo.getNumIndices());
+    
     ofPopMatrix();
     
-    //BOX-SMALL
+    //CYLINDER:
     ofPushMatrix();
     ofTranslate(300, 300, cos(ofGetElapsedTimef()*1.4) * 300.f);
-    ofRotate(ofGetElapsedTimef()*.6 * RAD_TO_DEG, 1, 0, 0);
-    ofRotate(ofGetElapsedTimef()*.8 * RAD_TO_DEG, 0, 1, 0);
-    cylinderVbo.draw(currentInputType, 0, cylinderVbo.getNumVertices());
+    
+    if(shaderManager.shaderName() != "duplicate"){
+        ofRotate(ofGetElapsedTimef()*.6 * RAD_TO_DEG, 1, 0, 0);
+        ofRotate(ofGetElapsedTimef()*.8 * RAD_TO_DEG, 0, 1, 0);
+    }
+    
+    if(shaderManager.getGLInputType() == GL_TRIANGLES){
+        //Cylinder needs triangle strip, not triangles
+        cylinderVbo.drawElements(GL_TRIANGLE_STRIP,  cylinderVbo.getNumIndices());
+    }else{
+        cylinderVbo.drawElements(shaderManager.getGLInputType(),  cylinderVbo.getNumIndices());
+    }
+    
+    
     ofPopMatrix();
     
     //BOX-BIG
     ofPushMatrix();
     ofTranslate(center.x, center.y, -1300);
-    ofRotate(ofGetElapsedTimef() * .2 * RAD_TO_DEG, 0, 1, 0);
-    boxVbo.draw(currentInputType, 0, boxVbo.getNumVertices());
+    
+    if(shaderManager.shaderName() != "duplicate")
+        ofRotate(ofGetElapsedTimef() * .2 * RAD_TO_DEG, 0, 1, 0);
+    
+    boxVbo.drawElements(shaderManager.getGLInputType(), boxVbo.getNumIndices());
     ofPopMatrix();
     
+    
+}
+//--------------------------------------------------------------
+void ofApp::setupVbos(){
+    
+    ofSetSphereResolution(128);
+    radius		= 180.f;
+    center.set(0, 0, 0);
+    
+    sphere.setRadius(radius);
+    ofVboMesh sphereMesh = sphere.getMesh();
+    sphereVbo = sphereMesh.getVbo();
+    
+    box.set(850);
+    ofVboMesh boxMesh = box.getMesh();
+    boxVbo = boxMesh.getVbo();
+    
+    cylinder.set(70, 150);
+    ofVboMesh cylinderMesh = cylinder.getMesh();
+    cylinderVbo = cylinderMesh.getVbo();
     
 }
 //--------------------------------------------------------------

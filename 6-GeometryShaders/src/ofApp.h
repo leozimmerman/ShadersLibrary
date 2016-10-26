@@ -11,6 +11,7 @@ public:
     void setup();
     void update();
     void draw();
+    void exit();
 
     void keyPressed  (int key);
     void keyReleased(int key);
@@ -25,6 +26,7 @@ public:
     void gotMessage(ofMessage msg);
     
     void setupLights();
+    void setupVbos();
     void setupGui();
     
     void updateLights();
@@ -72,8 +74,6 @@ public:
     void pointLightChanged(bool & bPointLight);
     void spotLightChanged(bool & bSpotLight);
     void dirLightChanged(bool & bDirLight);
-    
-    GLenum currentInputType;
     
     
 };

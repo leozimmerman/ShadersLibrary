@@ -18,6 +18,8 @@ public:
     void begin();
     void end();
     void reload();
+    
+    void setGeometryShader(int key);
 
     void toggleLight(ofLight * p_light, bool state);
     void toggleTexture(ofImage * p_img);
@@ -26,9 +28,17 @@ public:
     
     string shaderName(){return _shaderName;}
     
+    GLenum getGLInputType(){return currentGLInputType; }
+    GLenum getGLOutputType(){return currentGLOutputType; }
+    
 private:
     
     bool usingLight(ofLight* p_light);
     string _shaderName;
+    int currentKey;
+    
+    GLenum currentGLInputType;
+    GLenum currentGLOutputType;
+  
     
 };

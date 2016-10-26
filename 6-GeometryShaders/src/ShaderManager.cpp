@@ -18,11 +18,6 @@ void ShaderManager::load(string shaderName){
 
 void ShaderManager::begin(){
     
-//    if (!m_shader.isLoaded() || m_needsReload) {
-//        reload();
-//        m_needsReload = false;
-//    }
-//    
     m_shader.begin();
     
     if (m_tex != NULL){
@@ -46,8 +41,80 @@ void ShaderManager::end(){
 //--------------------------------------------------------------
 void ShaderManager::reload(){
     
-     m_shader.load(_shaderName);
+    setGeometryShader(currentKey);
     
+}
+//--------------------------------------------------------------
+void ShaderManager::setGeometryShader(int key){
+    
+    currentKey = key;
+    
+    switch (key) {
+        
+        case ' ':
+            reload();
+            break;
+            
+        case '0':
+            m_shader.unload();
+            m_shader.setGeometryInputType(GL_TRIANGLES);
+            m_shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
+            m_shader.setGeometryOutputCount(3);
+            m_shader.load("passthrough.vert", "passthrough.frag", "passthrough.geom");
+            currentGLInputType = GL_TRIANGLES;
+            currentGLOutputType = GL_TRIANGLE_STRIP;
+            _shaderName = "passtrough";
+            break;
+            
+        case '1':
+            m_shader.unload();
+            m_shader.setGeometryInputType(GL_TRIANGLES);
+            m_shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
+            m_shader.setGeometryOutputCount(6);
+            m_shader.load("duplicate.vert", "duplicate.frag", "duplicate.geom");
+            currentGLInputType = GL_TRIANGLES;
+            currentGLOutputType = GL_TRIANGLE_STRIP;
+            _shaderName = "duplicate";
+            break;
+        
+        case '2':
+            m_shader.unload();
+            m_shader.setGeometryInputType(GL_POINTS);
+            m_shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
+            m_shader.setGeometryOutputCount(24);
+            m_shader.load("cubes.vert", "cubes.frag", "cubes.geom");
+            currentGLInputType = GL_POINTS;
+            currentGLOutputType = GL_TRIANGLE_STRIP;
+            _shaderName = "cubes";
+            break;
+            
+        case '3':
+            m_shader.unload();
+            m_shader.setGeometryInputType(GL_LINES);
+            m_shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
+            m_shader.setGeometryOutputCount(24);
+            m_shader.load("cubelines.vert", "cubelines.frag", "cubelines.geom");
+            currentGLInputType = GL_LINES;
+            currentGLOutputType = GL_TRIANGLE_STRIP;
+            _shaderName = "cubelines";
+            break;
+            
+        case '4':
+            m_shader.unload();
+            m_shader.setGeometryInputType(GL_TRIANGLES);//GL_POINTS, GL_TRIANGLES
+            m_shader.setGeometryOutputType(GL_LINE_STRIP);//GL_TRIANGLE_STRIP
+            m_shader.setGeometryOutputCount(6);
+            m_shader.load("normals.vert", "normals.frag", "normals.geom");
+            currentGLInputType = GL_TRIANGLES;
+            currentGLOutputType = GL_LINE_STRIP;
+            _shaderName = "normals";
+            break;
+            
+
+        
+        default:
+            break;
+    }
 }
 //--------------------------------------------------------------
 void ShaderManager::toggleTexture(ofImage *p_img){

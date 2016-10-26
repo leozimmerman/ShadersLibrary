@@ -6,22 +6,40 @@ void ofApp::setup(){
     
     printGLInfo();
 
-    //ofSetLogLevel(OF_LOG_VERBOSE);
+    ofSetLogLevel(OF_LOG_VERBOSE);
     ofSetVerticalSync(true);
 	ofSetFrameRate(60);
     ofBackground(40);
-  
-    shaderManager.setGeometryShader('0');
+    
+
+    //shaderManager.load("tessellation");
     shaderManager.useLight(&spotLight);
     shaderManager.useLight(&directionalLight);
     shaderManager.useLight(&pointLight);
     shaderManager.useMaterial(&material);
     shaderManager.useCamera(&cam);
     
+    shader = shaderManager.shader();
+    
+    shader->setGeometryInputType(GL_TRIANGLES);
+    shader->setGeometryOutputType(GL_LINE_STRIP);
+    shader->setGeometryOutputCount(4);
+    
+    
+    shader->setupShaderFromFile(GL_VERTEX_SHADER, "tessellation.vert.glsl");
+    shader->setupShaderFromFile(GL_FRAGMENT_SHADER, "tessellation.frag.glsl");
+    shader->setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, "tessellation.geom.glsl");
+    shader->setupShaderFromFile(GL_TESS_CONTROL_SHADER, "tessellation.cont.glsl");
+    shader->setupShaderFromFile(GL_TESS_EVALUATION_SHADER, "tessellation.eval.glsl");
+    shader->linkProgram();
+    
+    // We work with 4 points per patch.
+    glPatchParameteri(GL_PATCH_VERTICES, 4);
+    
     setupVbos();
     setupLights();
     setupGui();
-
+    
 }
 
 
@@ -45,78 +63,84 @@ void ofApp::draw(){
     ofDrawAxis(1000);
     
     shaderManager.begin();
-    shaderManager.shader()->setUniform1f("u_size", cubeSize);
+    
+    shaderManager.shader()->setUniform1f("u_tessLevelInner", tessLevelInner);
+    shaderManager.shader()->setUniform1f("u_tessLevelOuter", tessLevelOuter);
     
     drawScene();
-
     shaderManager.end();
     
-    drawLights();
+    //drawLights();
 
     cam.end();
     ofDisableDepthTest();
 
+    
     gui.draw();
     ofDrawBitmapString(shaderManager.shaderName(), 20, ofGetHeight()-30);
 }
-//--------------------------------------------------------------
-void ofApp::exit() {
 
-}
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    switch (key) {
+        case ' ':
+            cout<<"*********************************"<<endl;
+            cout<<"-- RELOAD:"<<endl;
+            shader->unload();
+            shader->setupShaderFromFile(GL_VERTEX_SHADER, "tessellation.vert.glsl");
+            shader->setupShaderFromFile(GL_FRAGMENT_SHADER, "tessellation.frag.glsl");
+            shader->setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, "tessellation.geom.glsl");
+            shader->setupShaderFromFile(GL_TESS_CONTROL_SHADER, "tessellation.cont.glsl");
+            shader->setupShaderFromFile(GL_TESS_EVALUATION_SHADER, "tessellation.eval.glsl");
+            shader->linkProgram();
+            
+            break;
+        
+        case '0':
+            shaderManager.load("blank");
+            break;
+       
+            break;
+     
 
-    shaderManager.setGeometryShader(key);
-
+		default:
+			break;
+	}
 }
 
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key){
 
-
+}
 //--------------------------------------------------------------
 
 void ofApp::drawScene(){
-    
     
     //SPHERE
     ofSetColor(255, 255, 255, 255);
     ofPushMatrix();
     ofTranslate(center.x, center.y, center.z-300);
+    ofRotate(ofGetElapsedTimef() * .8 * RAD_TO_DEG, 0, 1, 0);
     
-    //Dont rotate with duplicate shader, cause it translates with a matrix mult.
-    if(shaderManager.shaderName() != "duplicate")
-        ofRotate(ofGetElapsedTimef() * .8 * RAD_TO_DEG, 0, 1, 0);
+    //sphereVbo.drawElements(GL_TRIANGLE_STRIP,  sphereVbo.getNumIndices());
     
-    sphereVbo.drawElements(shaderManager.getGLInputType(),  sphereVbo.getNumIndices());
+    sphereVbo.drawElements(GL_PATCHES, sphereVbo.getNumIndices());
     
     ofPopMatrix();
     
-    //CYLINDER:
+    //CYLINDER
     ofPushMatrix();
     ofTranslate(300, 300, cos(ofGetElapsedTimef()*1.4) * 300.f);
-    
-    if(shaderManager.shaderName() != "duplicate"){
-        ofRotate(ofGetElapsedTimef()*.6 * RAD_TO_DEG, 1, 0, 0);
-        ofRotate(ofGetElapsedTimef()*.8 * RAD_TO_DEG, 0, 1, 0);
-    }
-    
-    if(shaderManager.getGLInputType() == GL_TRIANGLES){
-        //Cylinder needs triangle strip, not triangles
-        cylinderVbo.drawElements(GL_TRIANGLE_STRIP,  cylinderVbo.getNumIndices());
-    }else{
-        cylinderVbo.drawElements(shaderManager.getGLInputType(),  cylinderVbo.getNumIndices());
-    }
-    
-    
+    ofRotate(ofGetElapsedTimef()*.6 * RAD_TO_DEG, 1, 0, 0);
+    ofRotate(ofGetElapsedTimef()*.8 * RAD_TO_DEG, 0, 1, 0);
+    cylinderVbo.drawElements(GL_PATCHES,  cylinderVbo.getNumIndices());
     ofPopMatrix();
     
-    //BOX-BIG
+    //BOX
     ofPushMatrix();
-    ofTranslate(center.x, center.y, -1300);
-    
-    if(shaderManager.shaderName() != "duplicate")
-        ofRotate(ofGetElapsedTimef() * .2 * RAD_TO_DEG, 0, 1, 0);
-    
-    boxVbo.drawElements(shaderManager.getGLInputType(), boxVbo.getNumIndices());
+    ofTranslate(center.x, center.y, -1200);
+    ofRotate(ofGetElapsedTimef() * .2 * RAD_TO_DEG, 0, 1, 0);
+    boxVbo.drawElements(GL_PATCHES,  boxVbo.getNumIndices());
     ofPopMatrix();
     
     
@@ -124,33 +148,40 @@ void ofApp::drawScene(){
 //--------------------------------------------------------------
 void ofApp::setupVbos(){
     
-    ofSetSphereResolution(128);
+    ofIcoSpherePrimitive sphere;
+    //ofSpherePrimitive sphere;
+    ofCylinderPrimitive cylinder;
+    ofBoxPrimitive box;
+    ofPlanePrimitive plane;
+    
+    
     radius		= 180.f;
     center.set(0, 0, 0);
     
     sphere.setRadius(radius);
+    sphere.setResolution(1);
     ofVboMesh sphereMesh = sphere.getMesh();
     sphereVbo.setMesh(sphereMesh, GL_DYNAMIC_DRAW);
     
     box.set(850);
+    box.setResolution(1);
     ofVboMesh boxMesh = box.getMesh();
-    boxVbo.setMesh(boxMesh, GL_DYNAMIC_DRAW);
+    boxVbo = boxMesh.getVbo();
     
     cylinder.set(70, 150);
     ofVboMesh cylinderMesh = cylinder.getMesh();
-    cylinderVbo.setMesh(cylinderMesh, GL_DYNAMIC_DRAW);
-    
+    cylinderVbo = cylinderMesh.getVbo();
+
 }
 //--------------------------------------------------------------
 void ofApp::setupLights(){
-    
+
     pointLight.setDiffuseColor( ofColor(0.f, 255.f, 0.f));
     pointLight.setSpecularColor( ofColor(255.f, 255.f, 0.f));
     pointLight.setPointLight();
     
     spotLight.setDiffuseColor( ofColor(255.f, 0.f, 0.f));
     spotLight.setSpecularColor( ofColor(255.f, 255.f, 255.f));
-
     spotLight.setSpotlight();
     spotLight.setSpotlightCutOff( 50 );
     spotLight.setSpotConcentration( 45 );
@@ -213,6 +244,8 @@ void ofApp::setupGui(){
     bSpotLight.addListener(this, &ofApp::spotLightChanged);
     bDirLight.addListener(this, &ofApp::dirLightChanged);
     
+    
+    
     gui.setup();
     
     lightParameters.setName("Lights");
@@ -234,9 +267,13 @@ void ofApp::setupGui(){
                                         ofFloatColor(0.0), ofFloatColor(0.5)));
     materialParameters.add(emissive.set("emmisive", ofFloatColor(0.0, 1.0),
                                         ofFloatColor(0.0), ofFloatColor(1.0)));
-    gui.add(cubeSize.set("cube size", 5.0, 0.0, 15.0));
+    
+    gui.add(tessLevelInner.set("INNER tess lev.", 1.0, 1.0, 5.0));
+    gui.add(tessLevelOuter.set("OUTER tess lev, ", 1.0, 1.0, 5.0));
+    
     gui.add(lightParameters);
     gui.add(materialParameters);
+    gui.add(bUseTexture.set("Use Texture",true));
     
    
 }
@@ -253,14 +290,8 @@ void ofApp::dirLightChanged(bool & bDirLight){
    shaderManager.toggleLight(&directionalLight, bDirLight);
 }
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-    
-}
-//--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){
-
 }
-
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
 

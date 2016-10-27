@@ -82,13 +82,16 @@
 		89449E3044D456F7DE7BEA14 /* ofxPanel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPanel.h; path = ../../../addons/ofxGui/src/ofxPanel.h; sourceTree = SOURCE_ROOT; };
 		907C5B5E104864A2D3A25745 /* ofxToggle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxToggle.cpp; path = ../../../addons/ofxGui/src/ofxToggle.cpp; sourceTree = SOURCE_ROOT; };
 		9604B925D32EE39065747725 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxBaseGui.cpp; path = ../../../addons/ofxGui/src/ofxBaseGui.cpp; sourceTree = SOURCE_ROOT; };
-		B3DB5D3A1DC1252600A91835 /* tessellation.cont.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = tessellation.cont.glsl; path = bin/data/tessellation.cont.glsl; sourceTree = "<group>"; };
-		B3DB5D3B1DC1252600A91835 /* tessellation.eval.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = tessellation.eval.glsl; path = bin/data/tessellation.eval.glsl; sourceTree = "<group>"; };
-		B3DB5D3C1DC1252600A91835 /* tessellation.frag.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = tessellation.frag.glsl; path = bin/data/tessellation.frag.glsl; sourceTree = "<group>"; };
-		B3DB5D3D1DC1252600A91835 /* tessellation.geom.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = tessellation.geom.glsl; path = bin/data/tessellation.geom.glsl; sourceTree = "<group>"; };
-		B3DB5D3E1DC1252600A91835 /* tessellation.vert.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; name = tessellation.vert.glsl; path = bin/data/tessellation.vert.glsl; sourceTree = "<group>"; };
-		B3DB5D3F1DC1253D00A91835 /* blank.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = blank.frag; path = bin/data/blank.frag; sourceTree = "<group>"; };
-		B3DB5D401DC1253D00A91835 /* blank.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = blank.vert; path = bin/data/blank.vert; sourceTree = "<group>"; };
+		B3DB5D3A1DC1252600A91835 /* tessTriang.cont */ = {isa = PBXFileReference; lastKnownFileType = text; name = tessTriang.cont; path = bin/data/tessTriang.cont; sourceTree = "<group>"; };
+		B3DB5D3B1DC1252600A91835 /* tessTriang.eval */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessTriang.eval; path = bin/data/tessTriang.eval; sourceTree = "<group>"; };
+		B3DB5D3C1DC1252600A91835 /* tessTriang.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessTriang.frag; path = bin/data/tessTriang.frag; sourceTree = "<group>"; };
+		B3DB5D3D1DC1252600A91835 /* tessTriang.geom */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessTriang.geom; path = bin/data/tessTriang.geom; sourceTree = "<group>"; };
+		B3DB5D3E1DC1252600A91835 /* tessTriang.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessTriang.vert; path = bin/data/tessTriang.vert; sourceTree = "<group>"; };
+		B3E245DF1DC26EE400DE868D /* tessQuads.cont */ = {isa = PBXFileReference; lastKnownFileType = text; name = tessQuads.cont; path = bin/data/tessQuads.cont; sourceTree = "<group>"; };
+		B3E245E01DC26EE400DE868D /* tessQuads.eval */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessQuads.eval; path = bin/data/tessQuads.eval; sourceTree = "<group>"; };
+		B3E245E11DC26EE400DE868D /* tessQuads.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessQuads.frag; path = bin/data/tessQuads.frag; sourceTree = "<group>"; };
+		B3E245E21DC26EE400DE868D /* tessQuads.geom */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessQuads.geom; path = bin/data/tessQuads.geom; sourceTree = "<group>"; };
+		B3E245E31DC26EE400DE868D /* tessQuads.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessQuads.vert; path = bin/data/tessQuads.vert; sourceTree = "<group>"; };
 		B87C60311EC1FE841C1ECD89 /* ofxLabel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxLabel.h; path = ../../../addons/ofxGui/src/ofxLabel.h; sourceTree = SOURCE_ROOT; };
 		C4A9EC4EFD9DED9846361868 /* ofxShadersFX_AlphaBlendingShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxShadersFX_AlphaBlendingShader.h; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_AlphaBlendingShader.h; sourceTree = SOURCE_ROOT; };
 		C70D8946940288799E82131E /* ofxSliderGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSliderGroup.h; path = ../../../addons/ofxGui/src/ofxSliderGroup.h; sourceTree = SOURCE_ROOT; };
@@ -184,13 +187,16 @@
 		B3DB5D391DC1251700A91835 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				B3DB5D3F1DC1253D00A91835 /* blank.frag */,
-				B3DB5D401DC1253D00A91835 /* blank.vert */,
-				B3DB5D3E1DC1252600A91835 /* tessellation.vert.glsl */,
-				B3DB5D3A1DC1252600A91835 /* tessellation.cont.glsl */,
-				B3DB5D3B1DC1252600A91835 /* tessellation.eval.glsl */,
-				B3DB5D3D1DC1252600A91835 /* tessellation.geom.glsl */,
-				B3DB5D3C1DC1252600A91835 /* tessellation.frag.glsl */,
+				B3DB5D3E1DC1252600A91835 /* tessTriang.vert */,
+				B3DB5D3A1DC1252600A91835 /* tessTriang.cont */,
+				B3DB5D3B1DC1252600A91835 /* tessTriang.eval */,
+				B3DB5D3D1DC1252600A91835 /* tessTriang.geom */,
+				B3DB5D3C1DC1252600A91835 /* tessTriang.frag */,
+				B3E245E31DC26EE400DE868D /* tessQuads.vert */,
+				B3E245DF1DC26EE400DE868D /* tessQuads.cont */,
+				B3E245E01DC26EE400DE868D /* tessQuads.eval */,
+				B3E245E21DC26EE400DE868D /* tessQuads.geom */,
+				B3E245E11DC26EE400DE868D /* tessQuads.frag */,
 			);
 			name = shaders;
 			sourceTree = "<group>";

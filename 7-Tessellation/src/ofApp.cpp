@@ -26,15 +26,17 @@ void ofApp::setup(){
     shader->setGeometryOutputCount(4);
     
     
-    shader->setupShaderFromFile(GL_VERTEX_SHADER, "tessellation.vert.glsl");
-    shader->setupShaderFromFile(GL_FRAGMENT_SHADER, "tessellation.frag.glsl");
-    shader->setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, "tessellation.geom.glsl");
-    shader->setupShaderFromFile(GL_TESS_CONTROL_SHADER, "tessellation.cont.glsl");
-    shader->setupShaderFromFile(GL_TESS_EVALUATION_SHADER, "tessellation.eval.glsl");
+    shader->setupShaderFromFile(GL_VERTEX_SHADER, "tessTriang.vert");
+    shader->setupShaderFromFile(GL_FRAGMENT_SHADER, "tessTriang.frag");
+    shader->setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, "tessTriang.geom");
+    shader->setupShaderFromFile(GL_TESS_CONTROL_SHADER, "tessTriang.cont");
+    shader->setupShaderFromFile(GL_TESS_EVALUATION_SHADER, "tessTriang.eval");
     shader->linkProgram();
+    glPatchParameteri(GL_PATCH_VERTICES, 3);
     
     // We work with 4 points per patch.
-    glPatchParameteri(GL_PATCH_VERTICES, 4);
+    ///glPatchParameteri(GL_PATCH_VERTICES, 4);
+    glPatchParameteri(GL_PATCH_VERTICES, 3);
     
     setupVbos();
     setupLights();
@@ -83,23 +85,28 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
     switch (key) {
-        case ' ':
-            cout<<"*********************************"<<endl;
-            cout<<"-- RELOAD:"<<endl;
-            shader->unload();
-            shader->setupShaderFromFile(GL_VERTEX_SHADER, "tessellation.vert.glsl");
-            shader->setupShaderFromFile(GL_FRAGMENT_SHADER, "tessellation.frag.glsl");
-            shader->setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, "tessellation.geom.glsl");
-            shader->setupShaderFromFile(GL_TESS_CONTROL_SHADER, "tessellation.cont.glsl");
-            shader->setupShaderFromFile(GL_TESS_EVALUATION_SHADER, "tessellation.eval.glsl");
-            shader->linkProgram();
-            
-            break;
+     
         
-        case '0':
-            shaderManager.load("blank");
+case '1':
+            shader->unload();
+            shader->setupShaderFromFile(GL_VERTEX_SHADER, "tessTriang.vert");
+            shader->setupShaderFromFile(GL_FRAGMENT_SHADER, "tessTriang.frag");
+            shader->setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, "tessTriang.geom");
+            shader->setupShaderFromFile(GL_TESS_CONTROL_SHADER, "tessTriang.cont");
+            shader->setupShaderFromFile(GL_TESS_EVALUATION_SHADER, "tessTriang.eval");
+            shader->linkProgram();
+            glPatchParameteri(GL_PATCH_VERTICES, 3);
             break;
-       
+            
+        case '2':
+            shader->unload();
+            shader->setupShaderFromFile(GL_VERTEX_SHADER, "tessQuads.vert");
+            shader->setupShaderFromFile(GL_FRAGMENT_SHADER, "tessQuads.frag");
+            shader->setupShaderFromFile(GL_GEOMETRY_SHADER_EXT, "tessQuads.geom");
+            shader->setupShaderFromFile(GL_TESS_CONTROL_SHADER, "tessQuads.cont");
+            shader->setupShaderFromFile(GL_TESS_EVALUATION_SHADER, "tessQuads.eval");
+            shader->linkProgram();
+            glPatchParameteri(GL_PATCH_VERTICES, 4);
             break;
      
 
@@ -121,11 +128,7 @@ void ofApp::drawScene(){
     ofPushMatrix();
     ofTranslate(center.x, center.y, center.z-300);
     ofRotate(ofGetElapsedTimef() * .8 * RAD_TO_DEG, 0, 1, 0);
-    
-    //sphereVbo.drawElements(GL_TRIANGLE_STRIP,  sphereVbo.getNumIndices());
-    
     sphereVbo.drawElements(GL_PATCHES, sphereVbo.getNumIndices());
-    
     ofPopMatrix();
     
     //CYLINDER
@@ -243,8 +246,6 @@ void ofApp::setupGui(){
     bPointLight.addListener(this, &ofApp::pointLightChanged);
     bSpotLight.addListener(this, &ofApp::spotLightChanged);
     bDirLight.addListener(this, &ofApp::dirLightChanged);
-    
-    
     
     gui.setup();
     

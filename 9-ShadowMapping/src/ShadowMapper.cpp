@@ -213,7 +213,7 @@ void ShadowMapper::allocateFbos() {
     settings.useDepth = true;
     settings.depthStencilAsTexture = true;
     settings.useStencil = true;
-//    settings.depthStencilInternalFormat = GL_DEPTH_COMPONENT32;
+    settings.depthStencilInternalFormat = GL_DEPTH_COMPONENT32F;//GL_DEPTH_COMPONENT(16/24/32)-optional
     shadowFbo.allocate( settings );
     
     

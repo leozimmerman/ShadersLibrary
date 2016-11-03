@@ -11,8 +11,8 @@ in vec4 position;
 in vec3 normal;
 in vec2 texcoord;
 
-out vec4 eyeSpaceVertex;
-out vec3 vertex_normal;
+out vec4 v_vertex;
+out vec3 v_normal;
 out vec2 varyingtexcoord;
 
 out vec4 lightDirections[8];
@@ -23,7 +23,7 @@ uniform int lightsNumber;
 void main() {
   
     
-    vertex_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
+    v_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
     varyingtexcoord = vec2(texcoord.x, texcoord.y);
     
     vec4 spaceVertex = modelViewMatrix * position;
@@ -32,7 +32,7 @@ void main() {
         lightDirections[i] = lights.light[i].position - spaceVertex;
     }
    
-    eyeSpaceVertex = -spaceVertex;
+    v_vertex = -spaceVertex;
     
     
     

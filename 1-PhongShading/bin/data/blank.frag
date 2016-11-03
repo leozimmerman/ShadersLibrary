@@ -10,13 +10,14 @@ uniform mat4 modelViewMatrix;
 uniform mat4 normalMatrix; //ofMatrix4x4::getTransposedOf(m_cam->getModelViewMatrix().getInverse());
 uniform int lightsNumber; //lights.size()
 
-in vec4 eyeSpaceVertexPos, ambientGlobal;
-in vec3 vertex_normal;
+in vec4 v_eye;
+in vec3 v_normal;
+in vec4  ambientGlobal;
 
 out vec4 fragColor;
 
 void main() {
     
     fragColor = ambientGlobal;
-    //fragColor = vec4(1.0, 0.0, 1.0, 1.0);
+    
 }

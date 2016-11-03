@@ -4,7 +4,6 @@ uniform samplerCube envMap;
 
 in vec3 reflectVec;
 
-
 out vec4 fragColor;
 
 void main(){

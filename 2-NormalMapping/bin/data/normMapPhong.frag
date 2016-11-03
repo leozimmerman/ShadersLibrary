@@ -9,8 +9,8 @@ uniform sampler2DRect normalMapTex;
 uniform int lightsNumber;
 
 in vec2 varyingtexcoord;
-in vec4 eyeSpaceVertex;
-in vec3 vertex_normal;
+in vec4 v_vertex;
+in vec3 v_normal;
 
 in vec4 lightDirections[8];
 
@@ -55,9 +55,9 @@ void main(void)
     
     for (int i=0; i<lightsNumber; i++){
         
-        vec3 N = normalize(vertex_normal.xyz);
+        vec3 N = normalize(v_normal.xyz);
         vec3 L = normalize(lightDirections[i].xyz);
-        vec3 V = normalize(eyeSpaceVertex.xyz);
+        vec3 V = normalize(v_vertex.xyz);
         vec3 PN = perturb_normal(N, V, uv);
         
         vec4 tex01_color = texture(tex, uv).rgba;
@@ -69,7 +69,7 @@ void main(void)
         {
             final_color += lights.light[i].diffuse * material.diffuse * lambertTerm * tex01_color;
             
-            vec3 E = normalize(eyeSpaceVertex.xyz);
+            vec3 E = normalize(v_vertex.xyz);
             vec3 R = reflect(-L, PN);
             float specular = pow( max(dot(R, E), 0.0), material.shininess);
             final_color += lights.light[i].specular * material.specular * specular;

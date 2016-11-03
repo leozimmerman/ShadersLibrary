@@ -15,8 +15,8 @@ uniform sampler2DRect tex0;
 uniform sampler2DRect tex1;
 uniform float maxHeight;
 
-out vec4 eyeSpaceVertexPos, ambientGlobal;
-out vec3 vertex_normal;
+out vec4 v_vertexPos, ambientGlobal;
+out vec3 v_normal;
 out vec3 interp_eyePos;
 out vec2 varyingtexcoord;
 
@@ -26,14 +26,14 @@ void main(void) {
     //Displacement:
     vec4 bumpColor = texture(tex1, texcoord);
     float df = 0.30 * bumpColor.r + 0.59 * bumpColor.g + 0.11 * bumpColor.b;
-    vertex_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
+    v_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
     vec4 newVertexPos = vec4(normal * df * float(maxHeight), 0.0) + position;
 
     //Phong:
-    //vertex_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
+    //v_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
     ambientGlobal = material.emission;
-    eyeSpaceVertexPos = modelViewMatrix * newVertexPos;
-    interp_eyePos = vec3(-eyeSpaceVertexPos);
+    v_vertexPos = modelViewMatrix * newVertexPos;
+    interp_eyePos = vec3(-v_vertexPos);
     
     varyingtexcoord = vec2(texcoord.x, texcoord.y);
     gl_Position = modelViewProjectionMatrix * newVertexPos;

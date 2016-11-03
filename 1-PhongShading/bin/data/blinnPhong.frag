@@ -10,8 +10,8 @@ uniform mat4 normalMatrix;
 uniform int lightsNumber;
 
 in vec4 position;
-in vec4 eyeSpaceVertexPos, ambientGlobal;
-in vec3 vertex_normal, interp_eyePos;
+in vec4 v_eye, ambientGlobal;
+in vec3 v_normal, interp_eyePos;
 
 out vec4 fragColor;
 
@@ -45,7 +45,7 @@ vec4 point_light( in int lightIndex, in vec3 normal) {
     float intensity, dist;
 
     pointLightColor = vec4(0.0);
-    lightDir = vec3(lights.light[lightIndex].position - eyeSpaceVertexPos);
+    lightDir = vec3(lights.light[lightIndex].position - v_eye);
     dist = length(lightDir);
     intensity = max(dot(normal, normalize(lightDir)), 0.0);
     if (intensity > 0.0) {
@@ -57,7 +57,7 @@ vec4 point_light( in int lightIndex, in vec3 normal) {
         diffuse = material.diffuse * lights.light[lightIndex].diffuse;
         ambient = material.ambient * lights.light[lightIndex].ambient;
         pointLightColor += att * (diffuse * intensity + ambient);
-        halfVector = normalize(lightDir - vec3(eyeSpaceVertexPos));
+        halfVector = normalize(lightDir - vec3(v_eye));
         NdotHV = max(dot(normal, halfVector), 0.0);
         specular = pow(NdotHV, material.shininess) * material.specular * lights.light[lightIndex].specular;
         pointLightColor += att * specular;
@@ -71,7 +71,7 @@ vec4 spot_light( in int lightIndex, in vec3 normal) {
     float intensity, dist;
 
     spotLightColor = vec4(0.0);
-    lightDir = vec3(lights.light[lightIndex].position - eyeSpaceVertexPos);
+    lightDir = vec3(lights.light[lightIndex].position - v_eye);
     dist = length(lightDir);
     intensity = max(dot(normal, normalize(lightDir)), 0.0);
     if (intensity > 0.0) {
@@ -86,7 +86,7 @@ vec4 spot_light( in int lightIndex, in vec3 normal) {
             diffuse = material.diffuse * lights.light[lightIndex].diffuse;
             ambient = material.ambient * lights.light[lightIndex].ambient;
             spotLightColor += att * (diffuse * intensity + ambient);
-            halfVector = normalize(lightDir - vec3(eyeSpaceVertexPos));
+            halfVector = normalize(lightDir - vec3(v_eye));
             NdotHV = max(dot(normal, halfVector), 0.0);
             specular = pow(NdotHV, material.shininess) * material.specular * lights.light[lightIndex].specular;
             spotLightColor += att * specular;
@@ -116,7 +116,7 @@ void main() {
     vec3 n;
 
     fragColor = ambientGlobal;
-    n = normalize(vertex_normal);
+    n = normalize(v_normal);
     fragColor += calc_lighting_color(n);
     fragColor.w = 1.0;
 }

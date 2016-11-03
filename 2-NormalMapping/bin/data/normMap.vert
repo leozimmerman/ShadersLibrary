@@ -59,12 +59,12 @@ void main(void)
     
 	
 	// Calculate eye vector, which is in camera space.
-	vec3 eyeSpaceVertex = vec3(-spaceVertex) ;
+	vec3 v_vertex = vec3(-spaceVertex) ;
 	
 	// Like the light, this brings the eye vector to texture space.
-	texSpaceEye.x = dot(eyeSpaceVertex, tangent);
-	texSpaceEye.y = dot(eyeSpaceVertex, bitangent);
-	texSpaceEye.z = dot(eyeSpaceVertex, n_normal);
+	texSpaceEye.x = dot(v_vertex, tangent);
+	texSpaceEye.y = dot(v_vertex, bitangent);
+	texSpaceEye.z = dot(v_vertex, n_normal);
 
 	//gl_Position = u_projectionMatrix*vertex;
     gl_Position = modelViewProjectionMatrix * position;

@@ -15,7 +15,7 @@ in vec3 normal;
 
 out vec4 ambientGlobal, diffuse, ambient, specular;
 
-vec4 eyeSpaceVertexPos;
+vec4 v_eye;
 
 void directional_light( in int lightIndex, in vec3 normal, inout vec4 diffuse, inout vec4 ambient, inout vec4 specular) {
     vec3 lightDir;
@@ -25,8 +25,8 @@ void directional_light( in int lightIndex, in vec3 normal, inout vec4 diffuse, i
     intensity = max(dot(normal, lightDir), 0.0);
     if (intensity > 0.0) {
         vec3 reflection;
-        vec3 eyeSpaceVertexPos_n = normalize(vec3(eyeSpaceVertexPos));
-        vec3 eyeVector = normalize(-eyeSpaceVertexPos_n);
+        vec3 v_eye_n = normalize(vec3(v_eye));
+        vec3 eyeVector = normalize(-v_eye_n);
         diffuse += lights.light[lightIndex].diffuse * material.diffuse * intensity;
         reflection = normalize((2.0 * dot(lightDir, normal) * normal) - lightDir);
         specular += pow(max(dot(reflection, eyeVector), 0.0), material.shininess) * material.specular * lights.light[lightIndex].specular;
@@ -36,14 +36,14 @@ void directional_light( in int lightIndex, in vec3 normal, inout vec4 diffuse, i
 void point_light( in int lightIndex, in vec3 normal, inout vec4 diffuse, inout vec4 ambient, inout vec4 specular) {
     vec3 lightDir;
     float intensity, dist;
-    lightDir = vec3(lights.light[lightIndex].position - eyeSpaceVertexPos);
+    lightDir = vec3(lights.light[lightIndex].position - v_eye);
     dist = length(lightDir);
     intensity = max(dot(normal, normalize(lightDir)), 0.0);
     if (intensity > 0.0) {
         float att;
         vec3 reflection;
-        vec3 eyeSpaceVertexPos_n = normalize(vec3(eyeSpaceVertexPos));
-        vec3 eyeVector = normalize(-eyeSpaceVertexPos_n);
+        vec3 v_eye_n = normalize(vec3(v_eye));
+        vec3 eyeVector = normalize(-v_eye_n);
         att = 1.0 / (lights.light[lightIndex].constant_attenuation + lights.light[lightIndex].linear_attenuation * dist + lights.light[lightIndex].quadratic_attenuation * dist * dist);
         diffuse += att * intensity * material.diffuse * lights.light[lightIndex].diffuse;
         ambient += att * material.ambient * lights.light[lightIndex].ambient;
@@ -55,14 +55,14 @@ void point_light( in int lightIndex, in vec3 normal, inout vec4 diffuse, inout v
 void spot_light( in int lightIndex, in vec3 normal, inout vec4 diffuse, inout vec4 ambient, inout vec4 specular) {
     vec3 lightDir;
     float intensity, dist;
-    lightDir = vec3(lights.light[lightIndex].position - eyeSpaceVertexPos);
+    lightDir = vec3(lights.light[lightIndex].position - v_eye);
     dist = length(lightDir);
     intensity = max(dot(normal, normalize(lightDir)), 0.0);
     if (intensity > 0.0) {
         float spotEffect, att;
         vec3 reflection;
-        vec3 eyeSpaceVertexPos_n = normalize(vec3(eyeSpaceVertexPos));
-        vec3 eyeVector = normalize(-eyeSpaceVertexPos_n);
+        vec3 v_eye_n = normalize(vec3(v_eye));
+        vec3 eyeVector = normalize(-v_eye_n);
         spotEffect = dot(normalize(lights.light[lightIndex].spot_direction), normalize(-lightDir));
         if (spotEffect > lights.light[lightIndex].spot_cos_cutoff) {
             spotEffect = pow(spotEffect, lights.light[lightIndex].spot_exponent);
@@ -92,13 +92,13 @@ vec4 calc_lighting_color( in vec3 normal, inout vec4 diffuse, inout vec4 ambient
 }
 
 void main() {
-    vec3 vertex_normal;
+    vec3 v_normal;
     diffuse = vec4(0.0);
     ambient = vec4(0.0);
     specular = vec4(0.0);
     ambientGlobal = material.emission;
-    eyeSpaceVertexPos = modelViewMatrix * position;
-    vertex_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
-    calc_lighting_color(vertex_normal, diffuse, ambient, specular);
+    v_eye = modelViewMatrix * position;
+    v_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
+    calc_lighting_color(v_normal, diffuse, ambient, specular);
     gl_Position = modelViewProjectionMatrix * position;
 }

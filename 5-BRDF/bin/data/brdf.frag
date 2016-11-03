@@ -14,8 +14,8 @@ uniform vec2 A;            // Slope distribution in x and y
 uniform vec3 Scale;        // Scale factors for intensity computation
 
 
-in vec4 eyeSpaceVertexPos;
-in vec3 vertex_normal;
+
+in vec3 v_normal;
 
 in vec3 N, L, H, R, T, B;
 

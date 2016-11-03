@@ -5,9 +5,9 @@ void ofApp::setup(){
     
     printGLInfo();
 
-    ofSetLogLevel(OF_LOG_VERBOSE);
-    ofSetVerticalSync(true);
-	ofSetFrameRate(60);
+    //ofSetLogLevel(OF_LOG_VERBOSE);
+    //ofSetVerticalSync(true);
+	//ofSetFrameRate(60);
     ofBackground(40);
     
     logoImage.load("of.png");

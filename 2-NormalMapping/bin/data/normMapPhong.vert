@@ -29,9 +29,7 @@ void main() {
     vec4 spaceVertex = modelViewMatrix * position;
     
     for (int i=0; i<lightsNumber; i++){
-        
         lightDirections[i] = lights.light[i].position - spaceVertex;
-    
     }
    
     eyeSpaceVertex = -spaceVertex;

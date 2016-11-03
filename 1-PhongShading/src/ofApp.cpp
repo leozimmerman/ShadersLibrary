@@ -3,19 +3,12 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
     
-    
     printGLInfo();
 
     ofSetLogLevel(OF_LOG_VERBOSE);
     ofSetVerticalSync(true);
 	ofSetFrameRate(60);
     ofBackground(40);
-    
-    setupLights();
-    
-    // tex coords for 3D objects in OF are from 0 -> 1, not 0 -> image.width
-    // so we must disable the arb rectangle call to allow 0 -> 1
-    //ofDisableArbTex();
     
     logoImage.load("of.png");
     
@@ -26,22 +19,9 @@ void ofApp::setup(){
     shaderManager.useMaterial(&material);
     shaderManager.useCamera(&cam);
     
-    //--------------------------------
     
-    ofSetSphereResolution(128);
-    radius		= 180.f;
-    center.set(0, 0, 0);
-    
-    sphere.setRadius(radius);
-    sphere.mapTexCoordsFromTexture(logoImage.getTexture());
-    
-    box.set(850);
-    box.mapTexCoordsFromTexture(logoImage.getTexture());
-    
-    cylinder.set(70, 150);
-    cylinder.mapTexCoordsFromTexture(logoImage.getTexture());
-    
-    //------------------------
+    setupPrimitives();
+    setupLights();
     setupGui();
     
 }
@@ -84,6 +64,8 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
     switch (key) {
         case ' ':
+            cout<<"***********************"<<endl;
+            cout<<"-- RELOAD: "<<endl;
             shaderManager.reload();
             break;
         
@@ -119,68 +101,6 @@ void ofApp::keyPressed(int key){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::setupLights(){
-    
-    // Point lights emit light in all directions //
-    // set the diffuse color, color reflected from the light source //
-    pointLight.setDiffuseColor( ofColor(0.f, 255.f, 0.f));
-    
-    // specular color, the highlight/shininess color //
-    pointLight.setSpecularColor( ofColor(255.f, 255.f, 0.f));
-    pointLight.setPointLight();
-    
-    spotLight.setDiffuseColor( ofColor(255.f, 0.f, 0.f));
-    spotLight.setSpecularColor( ofColor(255.f, 255.f, 255.f));
-    
-    // turn the light into spotLight, emit a cone of light //
-    spotLight.setSpotlight();
-    
-    // size of the cone of emitted light, angle between light axis and side of cone //
-    // angle range between 0 - 90 in degrees //
-    spotLight.setSpotlightCutOff( 50 );
-    
-    // rate of falloff, illumitation decreases as the angle from the cone axis increases //
-    // range 0 - 128, zero is even illumination, 128 is max falloff //
-    spotLight.setSpotConcentration( 45 );
-    
-    
-    // Directional Lights emit light based on their orientation, regardless of their position //
-    directionalLight.setDiffuseColor(ofColor(0.f, 0.f, 255.f));
-    directionalLight.setSpecularColor(ofColor(255.f, 255.f, 255.f));
-    directionalLight.setDirectional();
-    
-    // set the direction of the light
-    // set it pointing from left to right -> //
-    directionalLight.setOrientation( ofVec3f(0, 90, 0) );
-
-}
-//--------------------------------------------------------------
-void ofApp::updateLights(){
-    
-    pointLight.setPosition(cos(ofGetElapsedTimef()*.6f) * radius * 2 + center.x,
-                           sin(ofGetElapsedTimef()*.8f) * radius * 2 + center.y,
-                           -cos(ofGetElapsedTimef()*.8f) * radius * 2 + center.z);
-    
-    spotLight.setOrientation( ofVec3f( 0, cos(ofGetElapsedTimef()) * RAD_TO_DEG, 0) );
-    spotLight.setPosition( mouseX, mouseY, 200);
-    
-    spotLight.setSpotConcentration(spotConcentration);
-    spotLight.setSpotlightCutOff(spotCutOff);
-    
-}
-//--------------------------------------------------------------
-void ofApp::updateMaterial(){
-    
-    material.setColors(diffuse, ambient, specular, emissive);
-    material.setShininess(shininess);
-    
-}
-//--------------------------------------------------------------
 
 void ofApp::drawScene(){
     
@@ -207,9 +127,70 @@ void ofApp::drawScene(){
     ofRotate(ofGetElapsedTimef() * .2 * RAD_TO_DEG, 0, 1, 0);
     box.draw();
     ofPopMatrix();
+    
+    
+}
 
+//--------------------------------------------------------------
+void ofApp::setupPrimitives(){
+    
+    ofSetSphereResolution(128);
+    radius		= 180.f;
+    center.set(0, 0, 0);
+    
+    sphere.setRadius(radius);
+    sphere.mapTexCoordsFromTexture(logoImage.getTexture());
+    
+    box.set(850);
+    box.mapTexCoordsFromTexture(logoImage.getTexture());
+    
+    cylinder.set(70, 150);
+    cylinder.mapTexCoordsFromTexture(logoImage.getTexture());
+    
 
 }
+//--------------------------------------------------------------
+void ofApp::setupLights(){
+    
+    
+    pointLight.setDiffuseColor( ofColor(0.f, 255.f, 0.f));
+    pointLight.setSpecularColor( ofColor(255.f, 255.f, 0.f));
+    pointLight.setPointLight();
+    
+    spotLight.setDiffuseColor( ofColor(255.f, 0.f, 0.f));
+    spotLight.setSpecularColor( ofColor(255.f, 255.f, 255.f));
+    spotLight.setSpotlight();
+    spotLight.setSpotlightCutOff( 50 );
+    spotLight.setSpotConcentration( 45 );
+    
+    directionalLight.setDiffuseColor(ofColor(0.f, 0.f, 255.f));
+    directionalLight.setSpecularColor(ofColor(255.f, 255.f, 255.f));
+    directionalLight.setDirectional();
+    directionalLight.setOrientation( ofVec3f(0, 90, 0) );
+
+}
+//--------------------------------------------------------------
+void ofApp::updateLights(){
+    
+    pointLight.setPosition(cos(ofGetElapsedTimef()*.6f) * radius * 2 + center.x,
+                           sin(ofGetElapsedTimef()*.8f) * radius * 2 + center.y,
+                           -cos(ofGetElapsedTimef()*.8f) * radius * 2 + center.z);
+    
+    spotLight.setOrientation( ofVec3f( 0, cos(ofGetElapsedTimef()) * RAD_TO_DEG, 0) );
+    spotLight.setPosition( mouseX, mouseY, 200);
+    
+    spotLight.setSpotConcentration(spotConcentration);
+    spotLight.setSpotlightCutOff(spotCutOff);
+    
+}
+//--------------------------------------------------------------
+void ofApp::updateMaterial(){
+    
+    material.setColors(diffuse, ambient, specular, emissive);
+    material.setShininess(shininess);
+    
+}
+
 //--------------------------------------------------------------
 void ofApp::drawLights(){
     
@@ -285,6 +266,9 @@ void ofApp::dirLightChanged(bool & bDirLight){
 //--------------------------------------------------------------
 void ofApp::textureToggled(bool &bUseTexture){
     shaderManager.toggleTexture(&logoImage);
+}
+//--------------------------------------------------------------
+void ofApp::keyReleased(int key){
 }
 //--------------------------------------------------------------
 void ofApp::mouseMoved(int x, int y ){

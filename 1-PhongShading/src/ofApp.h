@@ -24,6 +24,7 @@ public:
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
     
+    void setupPrimitives();
     void setupLights();
     void setupGui();
     

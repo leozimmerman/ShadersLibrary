@@ -8,7 +8,7 @@
 Addons: ofxShadersFX, ofxCubeMap
 
 ## To add 
-- Geometry shaders
 - Shadows
-- Tesselation
-- BRDF
+- Vertex Displacemente + Noise
+
+

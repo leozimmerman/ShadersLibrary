@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxShadersFX.h"
-#include "ShaderManager.h"
+
+#include "NormMapShaderManager.h"
 #include "ofxGui.h"
 
 class ofApp : public ofBaseApp{
@@ -54,7 +54,7 @@ public:
     float radius;
     ofVec3f center;
     
-    ShaderManager shaderManager;
+    NormMapShaderManager shaderManager;
     
     ofxPanel gui;
     

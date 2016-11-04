@@ -3,7 +3,7 @@
 #include "ofMain.h"
 #include "ofxGui.h"
 
-#include "ShaderManager.h"
+#include "LightShaderManager.h"
 
 class ofApp : public ofBaseApp{
 
@@ -43,7 +43,7 @@ public:
     float radius;
     ofVec3f center;
     
-    ShaderManager shaderManager;
+    LightShaderManager shaderManager;
     
     ofxPanel gui;
     

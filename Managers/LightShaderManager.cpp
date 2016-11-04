@@ -1,17 +1,15 @@
 //
-//  ShaderManager.cpp
+//  LightShaderManager.cpp
 //  multilight
 //
 //  Created by Leo on 10/12/16.
 
 
 
-
-#include "ShaderManager.h"
-
+#include "LightShaderManager.h"
 
 
-void ShaderManager::load(string shaderName){
+void LightShaderManager::load(string shaderName){
     
     shader.load(shaderName);
     _shaderName = shaderName;
@@ -19,7 +17,7 @@ void ShaderManager::load(string shaderName){
 }
 //--------------------------------------------------------------
 
-void ShaderManager::begin(){
+void LightShaderManager::begin(){
     
     
     shader.begin();
@@ -34,7 +32,7 @@ void ShaderManager::begin(){
     
 }
 //--------------------------------------------------------------
-void ShaderManager::end(){
+void LightShaderManager::end(){
     
     shader.end();
     
@@ -43,14 +41,14 @@ void ShaderManager::end(){
     }
 }
 //--------------------------------------------------------------
-void ShaderManager::reload(){
+void LightShaderManager::reload(){
     
     shader.unload();
     shader.load(_shaderName);
     
 }
 //--------------------------------------------------------------
-void ShaderManager::toggleTexture(ofImage *p_img){
+void LightShaderManager::toggleTexture(ofImage *p_img){
     
     if (tex == NULL) {
         tex = p_img;
@@ -60,7 +58,7 @@ void ShaderManager::toggleTexture(ofImage *p_img){
     }
 }
 //--------------------------------------------------------------
-void ShaderManager::toggleLight(ofLight *p_light, bool state){
+void LightShaderManager::toggleLight(ofLight *p_light, bool state){
 
     bool isUsingLight = usingLight(p_light);
     
@@ -72,7 +70,7 @@ void ShaderManager::toggleLight(ofLight *p_light, bool state){
     
 }
 //--------------------------------------------------------------
-void ShaderManager::useLight(ofLight * p_light){
+void LightShaderManager::useLight(ofLight * p_light){
     
     const size_t limit = this->MAX_LIGHTS;
     
@@ -84,7 +82,7 @@ void ShaderManager::useLight(ofLight * p_light){
     }
 }
 //--------------------------------------------------------------
-void ShaderManager::removeLight(ofLight * p_light){
+void LightShaderManager::removeLight(ofLight * p_light){
     
     vector<ofLight *>::iterator light;
     
@@ -97,7 +95,7 @@ void ShaderManager::removeLight(ofLight * p_light){
     }
 }
 //--------------------------------------------------------------
-bool ShaderManager::usingLight(ofLight * p_light){
+bool LightShaderManager::usingLight(ofLight * p_light){
     
     vector<ofLight *>::iterator light;
     
@@ -111,7 +109,7 @@ bool ShaderManager::usingLight(ofLight * p_light){
     
 }
 //--------------------------------------------------------------
-void ShaderManager::setupLights(){
+void LightShaderManager::setupLights(){
     
     shader.setUniform1i("lightsNumber", lights.size());
     
@@ -167,7 +165,7 @@ void ShaderManager::setupLights(){
 
 }
 //--------------------------------------------------------------
-vector<string> ShaderManager::generateLightPropsNames() {
+vector<string> LightShaderManager::generateLightPropsNames() {
     vector<string> names;
     const char * props[] =
     {
@@ -200,7 +198,7 @@ vector<string> ShaderManager::generateLightPropsNames() {
 }
 
 //--------------------------------------------------------------
-void ShaderManager::setLightPosition(size_t lightIndex, vector<unsigned char> & buffer, const GLint * offsets){
+void LightShaderManager::setLightPosition(size_t lightIndex, vector<unsigned char> & buffer, const GLint * offsets){
     
     int offset = offsets[0 + lightIndex * LIGHT_PROPS_NUMBER];
     ofVec3f eyeSpaceLightPos = lights[lightIndex]->getGlobalPosition() * cam->getModelViewMatrix();
@@ -232,7 +230,7 @@ void ShaderManager::setLightPosition(size_t lightIndex, vector<unsigned char> & 
     
 }
 //--------------------------------------------------------------
-void ShaderManager::setLightColors(size_t lightIndex, vector<unsigned char> & buffer, const GLint * offsets) {
+void LightShaderManager::setLightColors(size_t lightIndex, vector<unsigned char> & buffer, const GLint * offsets) {
     int offset;
     
     // Light ambient color (vec4)
@@ -261,7 +259,7 @@ void ShaderManager::setLightColors(size_t lightIndex, vector<unsigned char> & bu
     *(reinterpret_cast<float*> (&buffer[0] + offset)) = 1.0; // 100% alpha
 }
 //--------------------------------------------------------------
-void ShaderManager::setLightAttenuation(size_t lightIndex, vector<unsigned char> & buffer, const GLint * offsets) {
+void LightShaderManager::setLightAttenuation(size_t lightIndex, vector<unsigned char> & buffer, const GLint * offsets) {
     int offset;
     
     // Light constant attenuation (float)
@@ -275,7 +273,7 @@ void ShaderManager::setLightAttenuation(size_t lightIndex, vector<unsigned char>
     *(reinterpret_cast<float*> (&buffer[0] + offset)) = lights[lightIndex]->getAttenuationQuadratic();
 }
 //--------------------------------------------------------------
-void ShaderManager::setLightSpotProperties(size_t lightIndex, vector<unsigned char> & buffer, const GLint * offsets) {
+void LightShaderManager::setLightSpotProperties(size_t lightIndex, vector<unsigned char> & buffer, const GLint * offsets) {
     int offset;
     ofVec4f spotDir = ofVec4f(0., 0., -1., 1.);
     
@@ -322,7 +320,7 @@ void ShaderManager::setLightSpotProperties(size_t lightIndex, vector<unsigned ch
     }
 }
 //--------------------------------------------------------------
-void ShaderManager::setupMaterial(){
+void LightShaderManager::setupMaterial(){
     // if no material provided, use the default one
     if (mat == NULL){
         mat = &defaultMat;
@@ -374,7 +372,7 @@ void ShaderManager::setupMaterial(){
 }
 //--------------------------------------------------------------
 
-void ShaderManager::setMaterialProperties(vector<unsigned char> & buffer, const GLint * offsets){
+void LightShaderManager::setMaterialProperties(vector<unsigned char> & buffer, const GLint * offsets){
     int offset;
     
     // Sphere material ambient color (vec4)

@@ -1,5 +1,5 @@
 //
-//  ShaderManager.hpp
+//  LightShaderManager.hpp
 //  multilight
 //
 //  Created by Leo on 10/12/16.
@@ -13,7 +13,7 @@
 #include "ofMain.h"
 
 
-class ShaderManager {
+class LightShaderManager {
 
 public:
     
@@ -25,6 +25,7 @@ public:
 
     void setMaterial(ofMaterial * p_mat){ mat = p_mat; }
     void setCamera(ofCamera * p_cam) { cam = p_cam; }
+    void setTexture(ofImage * p_img) {tex = p_img; }
     void useLight(ofLight * p_light);
     void removeLight(ofLight * p_light);
     

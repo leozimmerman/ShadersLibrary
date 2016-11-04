@@ -24,11 +24,11 @@ void ofApp::setup(){
     shaderManager.useLight(&spotLight);
     shaderManager.useLight(&directionalLight);
     shaderManager.useLight(&pointLight);
-    shaderManager.useMaterial(&material);
-    shaderManager.useCamera(&cam);
+    shaderManager.setMaterial(&material);
+    shaderManager.setCamera(&cam);
     
-    shaderManager.useTexture(&colorTexture);
-    shaderManager.useNormalMapTexture(&normalTexture);
+    shaderManager.setTexture(&colorTexture);
+    shaderManager.setNormalMapTexture(&normalTexture);
     //--------------------------------
     
     ofSetSphereResolution(128);

@@ -29,7 +29,7 @@ void ofApp::setup(){
     shader.load(_shaderName);
     
     shaderManager.load(_shaderName);
-    shaderManager.useCamera(&cam);
+    shaderManager.setCamera(&cam);
     shaderManager.useCubeMap(&cubeMap);
     //--------------------------------
     
@@ -54,8 +54,6 @@ void ofApp::setup(){
 void ofApp::update() {
     
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
-    
-
 }
 
 //--------------------------------------------------------------
@@ -68,13 +66,11 @@ void ofApp::draw(){
 
     if(ofIsGLProgrammableRenderer()){
         
-        
         //shaderManager.drawCubeMapEnvironment(2000);
-        shaderManager.begin();
-        drawScene();
-        shaderManager.end();
-    
         
+        shaderManager.begin();
+            drawScene();
+        shaderManager.end();
         
     }else{
         
@@ -117,11 +113,6 @@ void ofApp::keyPressed(int key){
 		default:
 			break;
 	}
-}
-
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
 }
 
 
@@ -175,47 +166,3 @@ void ofApp::setupGui(){
 }
 
 
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}

@@ -11,8 +11,8 @@ in vec4 position;
 in vec3 normal;
 in vec2 texcoord;
 
-uniform sampler2DRect tex0;
-uniform sampler2DRect tex1;
+uniform sampler2DRect texColor;
+uniform sampler2DRect texBumpMap;
 uniform float maxHeight;
 
 out vec4 v_vertexPos, ambientGlobal;
@@ -24,7 +24,7 @@ void main(void) {
     
 
     //Displacement:
-    vec4 bumpColor = texture(tex1, texcoord);
+    vec4 bumpColor = texture(texBumpMap, texcoord);
     float df = 0.30 * bumpColor.r + 0.59 * bumpColor.g + 0.11 * bumpColor.b;
     v_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
     vec4 newVertexPos = vec4(normal * df * float(maxHeight), 0.0) + position;

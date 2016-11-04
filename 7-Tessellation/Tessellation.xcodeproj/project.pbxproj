@@ -7,22 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		101AE079CE5E31FF9E913C0E /* ofxShadersFX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FE63EA8D8A6312DFF042DB6E /* ofxShadersFX.cpp */; };
-		1928136E41185701AEAF6882 /* ShaderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 575E86235A8C5ECAFA6C4BED /* ShaderManager.cpp */; };
 		1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 907C5B5E104864A2D3A25745 /* ofxToggle.cpp */; };
-		2668D66AFBAF2E3713A3E84F /* ofxShadersFX_AlphaBlendingShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 286246F1B552E11C6B039C08 /* ofxShadersFX_AlphaBlendingShader.cpp */; };
 		483908258D00B98B4BE69F07 /* ofxLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78D67A00EB899FAC09430597 /* ofxLabel.cpp */; };
 		5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C88333E71C9457E441C33474 /* ofxButton.cpp */; };
-		726C209987EEF791DEBA94BB /* ofxShadersFX_DisplaceMapShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6AB467AD809EA20C94D5B430 /* ofxShadersFX_DisplaceMapShader.cpp */; };
-		7C4A17F9EEC338046A8D5C6D /* MappingShader_sources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4085194E125F780D0CAAC013 /* MappingShader_sources.cpp */; };
 		837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 15F2C6477A769C03A56D1401 /* ofxSlider.cpp */; };
 		856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9604B925D32EE39065747725 /* ofxBaseGui.cpp */; };
-		8C51406F68842862CE16F39E /* ofxShadersFX_LightingShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 82D86DDAEBA77389DAF199F0 /* ofxShadersFX_LightingShader.cpp */; };
-		9B5DFE2B6EDCB2FC6E16520C /* LightingShader_sources.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C846433FDE13C1F18201A938 /* LightingShader_sources.cpp */; };
 		B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ECF8674C7975F1063C5E30CA /* ofxGuiGroup.cpp */; };
 		B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 802251BAF1B35B1D67B32FD0 /* ofxSliderGroup.cpp */; };
-		D87127648FBB37D441582315 /* ofxShadersFX_MappingShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7FC144450B96A3497A02A281 /* ofxShadersFX_MappingShader.cpp */; };
-		DE8B48D6EB41C4A40FB8FD95 /* ofxShadersFX_ColorKeyShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EAFD23E0A0857446E13E2636 /* ofxShadersFX_ColorKeyShader.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
 		E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
@@ -64,20 +55,9 @@
 		17E65988300FBD9AAA2CD0CA /* ofxGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGui.h; path = ../../../addons/ofxGui/src/ofxGui.h; sourceTree = SOURCE_ROOT; };
 		1C0DA2561397A7DE0246858B /* ofxGuiGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxGuiGroup.h; path = ../../../addons/ofxGui/src/ofxGuiGroup.h; sourceTree = SOURCE_ROOT; };
 		2834D88A62CD23F3DE2C47D1 /* ofxButton.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxButton.h; path = ../../../addons/ofxGui/src/ofxButton.h; sourceTree = SOURCE_ROOT; };
-		286246F1B552E11C6B039C08 /* ofxShadersFX_AlphaBlendingShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxShadersFX_AlphaBlendingShader.cpp; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_AlphaBlendingShader.cpp; sourceTree = SOURCE_ROOT; };
-		3FA3FE2B9AF88F7F80CBA2ED /* ofxShadersFX_LightingShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxShadersFX_LightingShader.h; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_LightingShader.h; sourceTree = SOURCE_ROOT; };
-		4085194E125F780D0CAAC013 /* MappingShader_sources.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = MappingShader_sources.cpp; path = ../../../addons/ofxShadersFX/src/MappingShader_sources.cpp; sourceTree = SOURCE_ROOT; };
-		416DB4097C11E780EF1101F3 /* ofxShadersFX_ColorKeyShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxShadersFX_ColorKeyShader.h; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_ColorKeyShader.h; sourceTree = SOURCE_ROOT; };
-		46E2085478426BE0D164BFF2 /* ofxShadersFX_DisplaceMapShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxShadersFX_DisplaceMapShader.h; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_DisplaceMapShader.h; sourceTree = SOURCE_ROOT; };
-		4B310D5143737236A2110A74 /* ShaderManager.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ShaderManager.h; path = src/ShaderManager.h; sourceTree = SOURCE_ROOT; };
 		52AFA1F08C420992CAAAE648 /* ofxSlider.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSlider.h; path = ../../../addons/ofxGui/src/ofxSlider.h; sourceTree = SOURCE_ROOT; };
-		575E86235A8C5ECAFA6C4BED /* ShaderManager.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ShaderManager.cpp; path = src/ShaderManager.cpp; sourceTree = SOURCE_ROOT; };
-		6AB467AD809EA20C94D5B430 /* ofxShadersFX_DisplaceMapShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxShadersFX_DisplaceMapShader.cpp; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_DisplaceMapShader.cpp; sourceTree = SOURCE_ROOT; };
-		715C53FE3DF478CEFB58DF2F /* ofxShadersFX.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxShadersFX.h; path = ../../../addons/ofxShadersFX/src/ofxShadersFX.h; sourceTree = SOURCE_ROOT; };
 		78D67A00EB899FAC09430597 /* ofxLabel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxLabel.cpp; path = ../../../addons/ofxGui/src/ofxLabel.cpp; sourceTree = SOURCE_ROOT; };
-		7FC144450B96A3497A02A281 /* ofxShadersFX_MappingShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxShadersFX_MappingShader.cpp; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_MappingShader.cpp; sourceTree = SOURCE_ROOT; };
 		802251BAF1B35B1D67B32FD0 /* ofxSliderGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxSliderGroup.cpp; path = ../../../addons/ofxGui/src/ofxSliderGroup.cpp; sourceTree = SOURCE_ROOT; };
-		82D86DDAEBA77389DAF199F0 /* ofxShadersFX_LightingShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxShadersFX_LightingShader.cpp; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_LightingShader.cpp; sourceTree = SOURCE_ROOT; };
 		87F26B4B24CBD428AD9EEBAA /* ofxBaseGui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxBaseGui.h; path = ../../../addons/ofxGui/src/ofxBaseGui.h; sourceTree = SOURCE_ROOT; };
 		89449E3044D456F7DE7BEA14 /* ofxPanel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxPanel.h; path = ../../../addons/ofxGui/src/ofxPanel.h; sourceTree = SOURCE_ROOT; };
 		907C5B5E104864A2D3A25745 /* ofxToggle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxToggle.cpp; path = ../../../addons/ofxGui/src/ofxToggle.cpp; sourceTree = SOURCE_ROOT; };
@@ -93,11 +73,8 @@
 		B3E245E21DC26EE400DE868D /* tessQuads.geom */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessQuads.geom; path = bin/data/tessQuads.geom; sourceTree = "<group>"; };
 		B3E245E31DC26EE400DE868D /* tessQuads.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = tessQuads.vert; path = bin/data/tessQuads.vert; sourceTree = "<group>"; };
 		B87C60311EC1FE841C1ECD89 /* ofxLabel.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxLabel.h; path = ../../../addons/ofxGui/src/ofxLabel.h; sourceTree = SOURCE_ROOT; };
-		C4A9EC4EFD9DED9846361868 /* ofxShadersFX_AlphaBlendingShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxShadersFX_AlphaBlendingShader.h; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_AlphaBlendingShader.h; sourceTree = SOURCE_ROOT; };
 		C70D8946940288799E82131E /* ofxSliderGroup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxSliderGroup.h; path = ../../../addons/ofxGui/src/ofxSliderGroup.h; sourceTree = SOURCE_ROOT; };
-		C846433FDE13C1F18201A938 /* LightingShader_sources.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = LightingShader_sources.cpp; path = ../../../addons/ofxShadersFX/src/LightingShader_sources.cpp; sourceTree = SOURCE_ROOT; };
 		C88333E71C9457E441C33474 /* ofxButton.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxButton.cpp; path = ../../../addons/ofxGui/src/ofxButton.cpp; sourceTree = SOURCE_ROOT; };
-		DAA2EA410A9B3A2F8C3CB496 /* ofxShadersFX_MappingShader.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxShadersFX_MappingShader.h; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_MappingShader.h; sourceTree = SOURCE_ROOT; };
 		E112B3AEBEA2C091BF2B40AE /* ofxPanel.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxPanel.cpp; path = ../../../addons/ofxGui/src/ofxPanel.cpp; sourceTree = SOURCE_ROOT; };
 		E4328143138ABC890047C5CB /* openFrameworksLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openFrameworksLib.xcodeproj; path = ../../../libs/openFrameworksCompiled/project/osx/openFrameworksLib.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E4B69B5B0A3A1756003C02F2 /* TessellationDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TessellationDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,9 +84,7 @@
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4EB691F138AFCF100A09F29 /* CoreOF.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = CoreOF.xcconfig; path = ../../../libs/openFrameworksCompiled/project/osx/CoreOF.xcconfig; sourceTree = SOURCE_ROOT; };
 		E4EB6923138AFD0F00A09F29 /* Project.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Project.xcconfig; sourceTree = "<group>"; };
-		EAFD23E0A0857446E13E2636 /* ofxShadersFX_ColorKeyShader.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxShadersFX_ColorKeyShader.cpp; path = ../../../addons/ofxShadersFX/src/ofxShadersFX_ColorKeyShader.cpp; sourceTree = SOURCE_ROOT; };
 		ECF8674C7975F1063C5E30CA /* ofxGuiGroup.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxGuiGroup.cpp; path = ../../../addons/ofxGui/src/ofxGuiGroup.cpp; sourceTree = SOURCE_ROOT; };
-		FE63EA8D8A6312DFF042DB6E /* ofxShadersFX.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxShadersFX.cpp; path = ../../../addons/ofxShadersFX/src/ofxShadersFX.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,27 +112,6 @@
 			children = (
 			);
 			name = local_addons;
-			sourceTree = "<group>";
-		};
-		7A400E566EF6BFC333896261 /* src */ = {
-			isa = PBXGroup;
-			children = (
-				C846433FDE13C1F18201A938 /* LightingShader_sources.cpp */,
-				4085194E125F780D0CAAC013 /* MappingShader_sources.cpp */,
-				FE63EA8D8A6312DFF042DB6E /* ofxShadersFX.cpp */,
-				715C53FE3DF478CEFB58DF2F /* ofxShadersFX.h */,
-				286246F1B552E11C6B039C08 /* ofxShadersFX_AlphaBlendingShader.cpp */,
-				C4A9EC4EFD9DED9846361868 /* ofxShadersFX_AlphaBlendingShader.h */,
-				EAFD23E0A0857446E13E2636 /* ofxShadersFX_ColorKeyShader.cpp */,
-				416DB4097C11E780EF1101F3 /* ofxShadersFX_ColorKeyShader.h */,
-				6AB467AD809EA20C94D5B430 /* ofxShadersFX_DisplaceMapShader.cpp */,
-				46E2085478426BE0D164BFF2 /* ofxShadersFX_DisplaceMapShader.h */,
-				82D86DDAEBA77389DAF199F0 /* ofxShadersFX_LightingShader.cpp */,
-				3FA3FE2B9AF88F7F80CBA2ED /* ofxShadersFX_LightingShader.h */,
-				7FC144450B96A3497A02A281 /* ofxShadersFX_MappingShader.cpp */,
-				DAA2EA410A9B3A2F8C3CB496 /* ofxShadersFX_MappingShader.h */,
-			);
-			name = src;
 			sourceTree = "<group>";
 		};
 		A763ED608B35AE3310251DEE /* src */ = {
@@ -205,17 +159,8 @@
 			isa = PBXGroup;
 			children = (
 				480A780D8D0308AE4A368801 /* ofxGui */,
-				BBF1A6B49C9643EAD0CFD9F2 /* ofxShadersFX */,
 			);
 			name = addons;
-			sourceTree = "<group>";
-		};
-		BBF1A6B49C9643EAD0CFD9F2 /* ofxShadersFX */ = {
-			isa = PBXGroup;
-			children = (
-				7A400E566EF6BFC333896261 /* src */,
-			);
-			name = ofxShadersFX;
 			sourceTree = "<group>";
 		};
 		E4328144138ABC890047C5CB /* Products */ = {
@@ -246,8 +191,6 @@
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
-				575E86235A8C5ECAFA6C4BED /* ShaderManager.cpp */,
-				4B310D5143737236A2110A74 /* ShaderManager.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -350,7 +293,6 @@
 			files = (
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
-				1928136E41185701AEAF6882 /* ShaderManager.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
 				5CBB2AB3A60F65431D7B555D /* ofxButton.cpp in Sources */,
 				B266578FC55D23BFEBC042E7 /* ofxGuiGroup.cpp in Sources */,
@@ -359,14 +301,6 @@
 				837220E80EB56CD44AD27F2A /* ofxSlider.cpp in Sources */,
 				B56FE57CC35806596D38118C /* ofxSliderGroup.cpp in Sources */,
 				1CD33E884D9E3358252E82A1 /* ofxToggle.cpp in Sources */,
-				9B5DFE2B6EDCB2FC6E16520C /* LightingShader_sources.cpp in Sources */,
-				7C4A17F9EEC338046A8D5C6D /* MappingShader_sources.cpp in Sources */,
-				101AE079CE5E31FF9E913C0E /* ofxShadersFX.cpp in Sources */,
-				2668D66AFBAF2E3713A3E84F /* ofxShadersFX_AlphaBlendingShader.cpp in Sources */,
-				DE8B48D6EB41C4A40FB8FD95 /* ofxShadersFX_ColorKeyShader.cpp in Sources */,
-				726C209987EEF791DEBA94BB /* ofxShadersFX_DisplaceMapShader.cpp in Sources */,
-				8C51406F68842862CE16F39E /* ofxShadersFX_LightingShader.cpp in Sources */,
-				D87127648FBB37D441582315 /* ofxShadersFX_MappingShader.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

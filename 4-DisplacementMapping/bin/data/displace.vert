@@ -11,12 +11,12 @@ in vec2 texcoord;
 
 out vec2 varyingtexcoord;
 
-uniform sampler2DRect tex0;
-uniform sampler2DRect tex1;
+uniform sampler2DRect texColor;
+uniform sampler2DRect texBumpMap;
 uniform float maxHeight;
 
 void main(void) {
-    vec4 bumpColor = texture(tex1, texcoord);
+    vec4 bumpColor = texture(texBumpMap, texcoord);
     float df = 0.30 * bumpColor.r + 0.59 * bumpColor.g + 0.11 * bumpColor.b;
     vec3 v_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
     

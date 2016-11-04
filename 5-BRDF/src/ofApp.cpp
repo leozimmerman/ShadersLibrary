@@ -19,8 +19,8 @@ void ofApp::setup(){
     shaderManager.useLight(&spotLight);
     shaderManager.useLight(&directionalLight);
     shaderManager.useLight(&pointLight);
-    shaderManager.useMaterial(&material);
-    shaderManager.useCamera(&cam);
+    shaderManager.setMaterial(&material);
+    shaderManager.setCamera(&cam);
     
     //--------------------------------
     
@@ -63,9 +63,9 @@ void ofApp::draw(){
     ofDrawAxis(1000);
     
     shaderManager.begin();
-    shaderManager.shader()->setUniform2f("P", P);
-    shaderManager.shader()->setUniform2f("A", A);
-    shaderManager.shader()->setUniform3f("Scale", Scale);
+    shaderManager.getShader()->setUniform2f("P", P);
+    shaderManager.getShader()->setUniform2f("A", A);
+    shaderManager.getShader()->setUniform3f("Scale", Scale);
     
     drawScene();
     shaderManager.end();
@@ -102,43 +102,21 @@ void ofApp::keyPressed(int key){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
 void ofApp::setupLights(){
     
-    // Point lights emit light in all directions //
-    // set the diffuse color, color reflected from the light source //
     pointLight.setDiffuseColor( ofColor(0.f, 255.f, 0.f));
-    
-    // specular color, the highlight/shininess color //
     pointLight.setSpecularColor( ofColor(255.f, 255.f, 0.f));
     pointLight.setPointLight();
     
     spotLight.setDiffuseColor( ofColor(255.f, 0.f, 0.f));
     spotLight.setSpecularColor( ofColor(255.f, 255.f, 255.f));
-    
-    // turn the light into spotLight, emit a cone of light //
     spotLight.setSpotlight();
-    
-    // size of the cone of emitted light, angle between light axis and side of cone //
-    // angle range between 0 - 90 in degrees //
     spotLight.setSpotlightCutOff( 50 );
-    
-    // rate of falloff, illumitation decreases as the angle from the cone axis increases //
-    // range 0 - 128, zero is even illumination, 128 is max falloff //
     spotLight.setSpotConcentration( 45 );
     
-    
-    // Directional Lights emit light based on their orientation, regardless of their position //
     directionalLight.setDiffuseColor(ofColor(0.f, 0.f, 255.f));
     directionalLight.setSpecularColor(ofColor(255.f, 255.f, 255.f));
     directionalLight.setDirectional();
-    
-    // set the direction of the light
-    // set it pointing from left to right -> //
     directionalLight.setOrientation( ofVec3f(0, 90, 0) );
 
 }
@@ -274,47 +252,4 @@ void ofApp::dirLightChanged(bool & bDirLight){
 void ofApp::textureToggled(bool &bUseTexture){
     shaderManager.toggleTexture(&logoImage);
 }
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
 
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}

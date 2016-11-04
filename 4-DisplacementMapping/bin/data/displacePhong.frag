@@ -8,8 +8,8 @@ uniform mat4 modelViewProjectionMatrix;
 uniform mat4 modelViewMatrix;
 uniform mat4 normalMatrix;
 
-uniform sampler2DRect tex0;
-uniform sampler2DRect tex1;
+uniform sampler2DRect texColor;
+uniform sampler2DRect texBumpMap;
 
 uniform int lightsNumber;
 
@@ -27,7 +27,7 @@ vec4 directional_light( in int lightIndex, in vec3 normal) {
     
     eyeVector = normalize(interp_eyePos);
     lightDir = normalize(lights.light[lightIndex].position.xyz);
-    ambient = material.ambient * lights.light[lightIndex].ambient * texture(tex0, varyingtexcoord);
+    ambient = material.ambient * lights.light[lightIndex].ambient * texture(texColor, varyingtexcoord);
     outputColor += ambient;
     intensity = max(dot(normal, lightDir), 0.0);
     if (intensity > 0.0) {
@@ -35,7 +35,7 @@ vec4 directional_light( in int lightIndex, in vec3 normal) {
         float NdotHV;
         
         diffuse = lights.light[lightIndex].diffuse * material.diffuse;
-        outputColor += diffuse * intensity * texture(tex0, varyingtexcoord);
+        outputColor += diffuse * intensity * texture(texColor, varyingtexcoord);
         halfVector = normalize(lightDir + eyeVector);
         NdotHV = max(dot(normal, halfVector), 0.0);
         specular = pow(NdotHV, material.shininess) * material.specular * lights.light[lightIndex].specular;
@@ -60,8 +60,8 @@ vec4 point_light( in int lightIndex, in vec3 normal) {
         vec3 halfVector;
         
         att = 1.0 / (lights.light[lightIndex].constant_attenuation + lights.light[lightIndex].linear_attenuation * dist + lights.light[lightIndex].quadratic_attenuation * dist * dist);
-        diffuse = material.diffuse * lights.light[lightIndex].diffuse * texture(tex0, varyingtexcoord);
-        ambient = material.ambient * lights.light[lightIndex].ambient * texture(tex0, varyingtexcoord);
+        diffuse = material.diffuse * lights.light[lightIndex].diffuse * texture(texColor, varyingtexcoord);
+        ambient = material.ambient * lights.light[lightIndex].ambient * texture(texColor, varyingtexcoord);
         pointLightColor += att * (diffuse * intensity + ambient);
         halfVector = normalize(lightDir - vec3(v_vertexPos));
         NdotHV = max(dot(normal, halfVector), 0.0);
@@ -89,8 +89,8 @@ vec4 spot_light( in int lightIndex, in vec3 normal) {
         if (spotEffect > lights.light[lightIndex].spot_cos_cutoff) {
             spotEffect = pow(spotEffect, lights.light[lightIndex].spot_exponent);
             att = spotEffect / (lights.light[lightIndex].constant_attenuation + lights.light[lightIndex].linear_attenuation * dist + lights.light[lightIndex].quadratic_attenuation * dist * dist);
-            diffuse = material.diffuse * lights.light[lightIndex].diffuse * texture(tex0, varyingtexcoord);
-            ambient = material.ambient * lights.light[lightIndex].ambient * texture(tex0, varyingtexcoord);
+            diffuse = material.diffuse * lights.light[lightIndex].diffuse * texture(texColor, varyingtexcoord);
+            ambient = material.ambient * lights.light[lightIndex].ambient * texture(texColor, varyingtexcoord);
             spotLightColor += att * (diffuse * intensity + ambient);
             halfVector = normalize(lightDir - vec3(v_vertexPos));
             NdotHV = max(dot(normal, halfVector), 0.0);
@@ -121,12 +121,12 @@ vec4 calc_lighting_color( in vec3 normal) {
 
 void main(void) {
     
-    //vec4 colorMap = texture(tex0, varyingtexcoord);
+    //vec4 colorMap = texture(texColor, varyingtexcoord);
     //fragColor = colorMap;
     
     vec3 n;
     
-    fragColor = ambientGlobal * texture(tex0, varyingtexcoord);
+    fragColor = ambientGlobal * texture(texColor, varyingtexcoord);
     n = normalize(v_normal);
     fragColor += calc_lighting_color(n);
     fragColor.w = 1.0;

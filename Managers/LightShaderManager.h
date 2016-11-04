@@ -47,7 +47,7 @@ public:
     void setupMaterial();
     void setMaterialProperties(vector<unsigned char> & p_buffer, const GLint * p_offsets);
     
-    
+    ofShader* getShader() {return &shader; }
     
 protected:
     

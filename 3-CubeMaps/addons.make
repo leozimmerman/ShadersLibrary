@@ -1,3 +1,2 @@
-ofxCubeMap
 ofxGui
-ofxShadersFX
+

@@ -15,8 +15,8 @@ void ofApp::setup(){
     shaderManager.useLight(&spotLight);
     shaderManager.useLight(&directionalLight);
     shaderManager.useLight(&pointLight);
-    shaderManager.useMaterial(&material);
-    shaderManager.useCamera(&cam);
+    shaderManager.setMaterial(&material);
+    shaderManager.setCamera(&cam);
     
     setupVbos();
     setupLights();
@@ -45,7 +45,7 @@ void ofApp::draw(){
     ofDrawAxis(1000);
     
     shaderManager.begin();
-    shaderManager.shader()->setUniform1f("u_size", cubeSize);
+    shaderManager.getShader()->setUniform1f("u_size", cubeSize);
     
     drawScene();
 
@@ -186,6 +186,8 @@ void ofApp::updateMaterial(){
 //--------------------------------------------------------------
 void ofApp::drawLights(){
     
+    ofPushStyle();
+    
     ofSetColor( pointLight.getDiffuseColor() );
     if(bPointLight) pointLight.draw();
     
@@ -194,6 +196,8 @@ void ofApp::drawLights(){
     
     ofSetColor( spotLight.getDiffuseColor() );
     if(bSpotLight) spotLight.draw();
+    
+    ofPopStyle();
     
 }
 //--------------------------------------------------------------
@@ -252,51 +256,4 @@ void ofApp::spotLightChanged(bool & bSpotLight){
 void ofApp::dirLightChanged(bool & bDirLight){
    shaderManager.toggleLight(&directionalLight, bDirLight);
 }
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-    
-}
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
 
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}

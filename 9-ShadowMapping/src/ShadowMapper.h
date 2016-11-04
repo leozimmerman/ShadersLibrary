@@ -2,6 +2,9 @@
 #pragma once
 #include "ofMain.h"
 
+/*
+ Class based on: https://github.com/NickHardeman/ofxShadowSimple
+ */
 
 class ShadowMapper {
 

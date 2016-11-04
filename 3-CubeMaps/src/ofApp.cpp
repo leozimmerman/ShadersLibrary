@@ -112,12 +112,6 @@ void ofApp::keyPressed(int key){
             cout<<"\n**********************************\n"<<endl;
             break;
         
-        case '1':
-            shaderManager.load("normMapPhong");
-            break;
-        case '2':
-            shaderManager.load("normMap");
-            break;
             
 
 		default:

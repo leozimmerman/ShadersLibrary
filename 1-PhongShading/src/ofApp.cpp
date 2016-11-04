@@ -11,22 +11,21 @@ void ofApp::setup(){
     ofBackground(40);
     
     logoImage.load("of.png");
+    logoImage.mirror(true, false);
     
     shaderManager.load("phong");
+    
+    shaderManager.setMaterial(&material);
+    shaderManager.setCamera(&cam);
     shaderManager.useLight(&spotLight);
     shaderManager.useLight(&directionalLight);
     shaderManager.useLight(&pointLight);
-    shaderManager.useMaterial(&material);
-    shaderManager.useCamera(&cam);
-    
     
     setupPrimitives();
     setupLights();
     setupGui();
     
 }
-
-
 
 //--------------------------------------------------------------
 void ofApp::update() {
@@ -47,7 +46,7 @@ void ofApp::draw(){
     ofDrawAxis(1000);
     
     shaderManager.begin();
-    drawScene();
+        drawScene();
     shaderManager.end();
     
     drawLights();
@@ -82,15 +81,18 @@ void ofApp::keyPressed(int key){
             shaderManager.load("blinnPhong");
             break;
         case '4':
-            shaderManager.load("gouraudPhong");
+            shaderManager.load("blinnPhongTex");
             break;
         case '5':
-            shaderManager.load("gouraudPhongTex");
+            shaderManager.load("gouraudPhong");
             break;
         case '6':
-            shaderManager.load("gouraudBlinn");
+            shaderManager.load("gouraudPhongTex");
             break;
         case '7':
+            shaderManager.load("gouraudBlinn");
+            break;
+        case '8':
             shaderManager.load("gouraudBlinnTex");
             break;
      
@@ -105,12 +107,10 @@ void ofApp::keyPressed(int key){
 void ofApp::drawScene(){
     
     //SPHERE
-    ofSetColor(255, 255, 255, 255);
     ofPushMatrix();
     ofTranslate(center.x, center.y, center.z-300);
     ofRotate(ofGetElapsedTimef() * .8 * RAD_TO_DEG, 0, 1, 0);
-    
-    sphere.draw();
+        sphere.draw();
     ofPopMatrix();
     
     //BOX-SMALL
@@ -194,6 +194,8 @@ void ofApp::updateMaterial(){
 //--------------------------------------------------------------
 void ofApp::drawLights(){
     
+    ofPushStyle();
+    
     ofSetColor( pointLight.getDiffuseColor() );
     if(bPointLight) pointLight.draw();
     
@@ -202,6 +204,8 @@ void ofApp::drawLights(){
     
     ofSetColor( spotLight.getDiffuseColor() );
     if(bSpotLight) spotLight.draw();
+    
+    ofPopStyle();
     
 }
 //--------------------------------------------------------------
@@ -267,50 +271,4 @@ void ofApp::dirLightChanged(bool & bDirLight){
 void ofApp::textureToggled(bool &bUseTexture){
     shaderManager.toggleTexture(&logoImage);
 }
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-}
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
 
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mousePressed(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}

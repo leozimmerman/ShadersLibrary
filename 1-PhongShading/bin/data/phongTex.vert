@@ -13,14 +13,15 @@ in vec4 position;
 in vec3 normal;
 in vec2 texcoord;
 
-out vec4 v_eye, ambientGlobal;
+out vec4 v_eye;
 out vec3 v_normal;
 out vec2 varyingtexcoord;
 
 void main() {
-    ambientGlobal = material.emission;
+    
     v_eye = modelViewMatrix * position;
     v_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
     varyingtexcoord = vec2(texcoord.x, texcoord.y);
     gl_Position = modelViewProjectionMatrix * position;
+    
 }

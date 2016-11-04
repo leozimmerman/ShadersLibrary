@@ -11,13 +11,14 @@ uniform mat4 normalMatrix;
 in vec4 position;
 in vec3 normal;
 
-out vec4 v_eye, ambientGlobal;
+out vec4 v_eye;
 out vec3 v_normal, interp_eyePos;
 
 void main() {
-    ambientGlobal = material.emission;
+    
     v_eye = modelViewMatrix * position;
     v_normal = normalize((normalMatrix * vec4(normal, 0.0)).xyz);
     interp_eyePos = vec3(-v_eye);
     gl_Position = modelViewProjectionMatrix * position;
+    
 }

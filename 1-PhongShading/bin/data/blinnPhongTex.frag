@@ -11,7 +11,7 @@ uniform sampler2DRect tex;
 uniform int lightsNumber;
 
 in vec2 varyingtexcoord;
-in vec4 v_eye, ambientGlobal;
+in vec4 v_eye;
 in vec3 v_normal, interp_eyePos;
 
 out vec4 fragColor;
@@ -116,10 +116,9 @@ vec4 calc_lighting_color( in vec3 normal) {
 }
 
 void main() {
-    vec3 n;
-
-    fragColor = ambientGlobal * texture(tex, varyingtexcoord);
-    n = normalize(v_normal);
-    fragColor += calc_lighting_color(n);
+    
+    fragColor = material.emission * texture(tex, varyingtexcoord);
+    
+    fragColor += calc_lighting_color(v_normal);
     fragColor.w = 1.0;
 }

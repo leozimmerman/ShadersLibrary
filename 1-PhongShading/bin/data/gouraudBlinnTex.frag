@@ -2,7 +2,9 @@
 
 #version 330
 
-uniform sampler2DRect tex; in vec4 ambientGlobal, diffuse, ambient, specular;
+uniform sampler2DRect tex;
+
+in vec4 ambientGlobal, diffuse, ambient, specular;
 
 in vec2 varyingtexcoord;
 

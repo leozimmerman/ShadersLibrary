@@ -10,7 +10,7 @@ uniform mat4 normalMatrix;
 uniform int lightsNumber;
 
 in vec4 position;
-in vec4 v_eye, ambientGlobal;
+in vec4 v_eye;
 in vec3 v_normal, interp_eyePos;
 
 out vec4 fragColor;
@@ -113,10 +113,10 @@ vec4 calc_lighting_color( in vec3 normal) {
 }
 
 void main() {
-    vec3 n;
-
-    fragColor = ambientGlobal;
-    n = normalize(v_normal);
-    fragColor += calc_lighting_color(n);
+    
+    fragColor = material.emission;
+    
+    fragColor += calc_lighting_color(v_normal);
     fragColor.w = 1.0;
+    
 }

@@ -9,6 +9,8 @@ void ofApp::setup() {
     shadow.setup(ofGetWidth(), ofGetHeight());
     shadow.setBias( 0.01 );
     
+    setupPrimitives();
+    
     setupGui();
 
     printGLInfo();
@@ -67,25 +69,48 @@ void ofApp::draw(){
 //--------------------------------------------------------------
 void ofApp::drawScene() {
     
-    for (int i=0; i<10; i++){
-        float size = 10 + i;
-        float x = sin( ofGetElapsedTimef() * 0.1 * i) * 100  ;
-        float y = cos( ofGetElapsedTimef() * 0.1 * i) * 50 ;
+    for (int i=0; i<boxes.size(); i++){
+        
+        float x = sin( ofGetElapsedTimef() * 0.1 * i) * 100;
+        float y = cos( ofGetElapsedTimef() * 0.1 * i) * 50;
         float z = - 10 + i * 10;
-        ofDrawBox( x, y, z, size);
+        
+        boxes[i].setPosition(x, y, z);
+        boxes[i].draw();
+        
     }
     
-    ofDrawSphere(0, 0, 0, 30);
-    
 
-    //floor:
-    ofDrawBox( 0, -70, -10, 500, 2, 250 );
-
-    //wall:
-    ofDrawBox(0, 10, -100, 600, 300, 2 );
-
+    sphere.draw();
+    floor.draw();
+    wall.draw();
+   
 }
 
+//--------------------------------------------------------------
+void ofApp::setupPrimitives(){
+    
+    sphere.setRadius(30);
+    sphere.getMesh().setColorForIndices(0, sphere.getMesh().getNumIndices(), ofColor::red);
+
+    floor.set(500, 2, 250 );
+    floor.setPosition(0, -70, -10);
+    floor.getMesh().setColorForIndices(0, floor.getMesh().getNumIndices(), ofColor::yellow);
+    
+    wall.set(600, 300, 2 );
+    wall.setPosition(0, 10, -100);
+    wall.getMesh().setColorForIndices(0, wall.getMesh().getNumIndices(), ofColor::yellow);
+    
+    
+    for (int i=0; i<10; i++){
+        ofBoxPrimitive box;
+        float size = 10 + i;
+        box.set(size);
+        box.getMesh().setColorForIndices(0, box.getMesh().getNumIndices(), ofColor::blue);
+        boxes.push_back(box);
+    }
+    
+}
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){

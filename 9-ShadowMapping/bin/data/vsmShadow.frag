@@ -9,15 +9,14 @@ in vec3 v_normal;
 in vec4 v_vertInLightSpace;
 in vec3 v_lightDir;
 in vec4 v_position;
+in vec4 v_color;
 
 out vec4 fragColor;
 
 
 void main() {
     
-    vec4 myColor = vec4(1.0, 1.0, 0.0, 1.0);//yellow
     
-    //-------------------------------
     // get projected shadow value
     vec4 depth = v_vertInLightSpace / v_vertInLightSpace.w;
     depth.y = 1.0 - depth.y;
@@ -54,7 +53,7 @@ void main() {
     vec3 lightDir   = v_lightDir;
     float lambert = max(dot(normal, normalize(lightDir) ), 0.0);
     
-    vec4 diffuse =  myColor * clamp( lambert, 0.0, 1.0 )* shadow;
+    vec4 diffuse =  v_color * clamp( lambert, 0.0, 1.0 )* shadow;
     
     fragColor = vec4(diffuse.xyz, 1.0);
     

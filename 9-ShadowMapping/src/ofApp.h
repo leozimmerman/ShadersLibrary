@@ -17,6 +17,8 @@ public:
     
     void drawScene();
     
+    void setupPrimitives();
+    
     void setupGui();
     
     void printGLInfo();
@@ -24,6 +26,11 @@ public:
     ofEasyCam cam;
     
     ShadowMapper shadow;
+    
+    ofSpherePrimitive sphere;
+    ofBoxPrimitive floor;
+    ofBoxPrimitive wall;
+    vector<ofBoxPrimitive> boxes;
     
     ofxPanel gui;
     

@@ -7,17 +7,18 @@
 
 uniform mat4 modelViewProjectionMatrix;
 uniform mat4 modelViewMatrix;
-uniform mat4 normalMatrix; //ofMatrix4x4::getTransposedOf(m_cam->getModelViewMatrix().getInverse());
-uniform int lightsNumber; //lights.size()
+uniform mat4 normalMatrix;
+
+uniform int lightsNumber;
 
 in vec4 v_eye;
 in vec3 v_normal;
-in vec4  ambientGlobal;
+in vec4 v_color;
 
 out vec4 fragColor;
 
 void main() {
     
-    fragColor = ambientGlobal;
+    fragColor = v_color;
     
 }

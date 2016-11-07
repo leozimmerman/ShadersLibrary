@@ -9,6 +9,7 @@ uniform float u_height;
 uniform float u_shadowIntensity;
 
 in vec3 v_normal;
+in vec4 v_color;
 in vec4 v_vertInLightSpace;
 in vec3 v_lightDir;
 
@@ -36,8 +37,7 @@ const vec2 poissonDisk[16] = vec2[16] (
 
 void main( void ) {
     
-    vec4 myColor = vec4(1.0, 1.0, 0.0, 1.0);//yellow
-    
+
     //Shadow:
     vec3 tdepth = v_vertInLightSpace.xyz / v_vertInLightSpace.w;
     vec4 depth  = vec4( tdepth.xyz, v_vertInLightSpace.w );
@@ -67,7 +67,7 @@ void main( void ) {
     vec3 lightDir   = v_lightDir;
     float lambert = max(dot(normal, normalize(lightDir) ), 0.0);
     
-    vec4 diffuse = myColor * clamp( lambert, 0.0, 1.0 ) * shadow;
+    vec4 diffuse = v_color * clamp( lambert, 0.0, 1.0 ) * shadow;
     
     fragColor = vec4(diffuse.xyz, 1.0);
     

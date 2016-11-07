@@ -107,11 +107,14 @@ void ofApp::keyPressed(int key){
 void ofApp::drawScene(){
     
     //SPHERE
+    
+    
     ofPushMatrix();
     ofTranslate(center.x, center.y, center.z-300);
     ofRotate(ofGetElapsedTimef() * .8 * RAD_TO_DEG, 0, 1, 0);
         sphere.draw();
     ofPopMatrix();
+    
     
     //BOX-SMALL
     ofPushMatrix();
@@ -140,14 +143,20 @@ void ofApp::setupPrimitives(){
     
     sphere.setRadius(radius);
     sphere.mapTexCoordsFromTexture(logoImage.getTexture());
+    ofMesh* mesh = sphere.getMeshPtr();
+    mesh->setColorForIndices(0, mesh->getNumIndices(), ofColor::red);
     
     box.set(850);
     box.mapTexCoordsFromTexture(logoImage.getTexture());
+    mesh = box.getMeshPtr();
+    mesh->setColorForIndices(0, mesh->getNumIndices(), ofColor::blue);
+    
     
     cylinder.set(70, 150);
     cylinder.mapTexCoordsFromTexture(logoImage.getTexture());
+    mesh = cylinder.getMeshPtr();
+    mesh->setColorForIndices(0, mesh->getNumIndices(), ofColor::yellow);
     
-
 }
 //--------------------------------------------------------------
 void ofApp::setupLights(){

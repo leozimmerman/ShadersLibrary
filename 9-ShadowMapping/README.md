@@ -16,3 +16,5 @@
 
 #### Dependencies:
 ShadowMapper class is based on [ofxShadowSimple](https://github.com/NickHardeman/ofxShadowSimple) class
+
+![alt tag](shadow.png)

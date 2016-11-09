@@ -13,3 +13,6 @@ In the majority of cases, cube mapping is preferred over the older method of sph
 #### Sources:
 * https://forum.openframeworks.cc/t/cubemapping-in-glsl/5567/5
 * https://github.com/McNopper/OpenGL/tree/master/Example
+
+
+![alt tag](cubeMap.png)

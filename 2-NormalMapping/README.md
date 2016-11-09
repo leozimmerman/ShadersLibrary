@@ -12,3 +12,5 @@ Normal maps are commonly stored as regular RGB images where the RGB components c
 - http://www.geeks3d.com/20130122/normal-mapping-without-precomputed-tangent-space-vectors/
 
 - http://www.thetenthplanet.de/archives/1180
+
+![alt tag](normalMap.png)

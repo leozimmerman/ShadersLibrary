@@ -28,3 +28,5 @@ https://en.wikipedia.org/wiki/Blinn%E2%80%93Phong_shading_model
 The Blinn–Phong reflection model (also called the modified Phong reflection model) is a modification to the Phong reflection model developed by Jim Blinn.[1]
 
 Blinn–Phong is the default shading model used in OpenGL[2] and Direct3D's fixed-function pipeline (before Direct3D 10 and OpenGL 3.1), and is carried out on each vertex as it passes down the graphics pipeline; pixel values between vertices are interpolated by Gouraud shading by default, rather than the more computationally-expensive Phong shading.
+
+![alt tag](phong.png)

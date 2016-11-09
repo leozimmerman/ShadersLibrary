@@ -21,3 +21,15 @@ This library gathers different related examples, projects, tutorials, documentat
 
 * Xcode projects were developed with OF **0.9.3** and **Xcode 8.0**
 * Clone this repository into OF_ROOT/apps/
+
+![alt tag](1-PhongShading/phong.png)
+
+![alt tag](2-NormalMapping/normalMap.png)
+
+![alt tag](3-CubeMaps/cubeMap.png)
+
+![alt tag](6-GeometryShaders/cubes.png)
+
+![alt tag](6-GeometryShaders/rects.png)
+
+![alt tag](9-ShadowMapping/shadow.png)

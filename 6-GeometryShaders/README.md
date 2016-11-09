@@ -18,3 +18,6 @@
 
 * Procedural Primitives:
 http://wiki.unity3d.com/index.php/ProceduralPrimitives#C.23_-_Box
+
+![alt tag](cubes.png)
+![alt tag](rects.png)

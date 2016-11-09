@@ -15,4 +15,4 @@
 
 
 #### Dependencies:
-ShadowMapper class its based on ofxShadowSimple class
+ShadowMapper class is based on [ofxShadowSimple](https://github.com/NickHardeman/ofxShadowSimple) class

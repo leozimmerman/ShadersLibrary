@@ -1,5 +1,6 @@
-#version 330
+// Copyright (C) 2016 Leo Zimmerman [http://www.leozimmerman.com.ar]
 
+#version 330
 
 uniform mat4 modelViewProjectionMatrix;
 uniform mat4 modelViewMatrix;

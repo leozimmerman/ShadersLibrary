@@ -1,5 +1,6 @@
-#version 330
+// Copyright (C) 2016 Leo Zimmerman [http://www.leozimmerman.com.ar]
 
+#version 330
 
 // A triangle with three points come in
 layout(points) in;

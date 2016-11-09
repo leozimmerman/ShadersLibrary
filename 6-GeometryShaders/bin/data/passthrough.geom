@@ -1,6 +1,5 @@
 #version 330
 
-
 // A triangle with three points come in
 layout(triangles) in;
 

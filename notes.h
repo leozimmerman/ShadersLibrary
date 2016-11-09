@@ -22,6 +22,20 @@ static const string USE_TEXTURE_UNIFORM="usingTexture";
 static const string USE_COLORS_UNIFORM="usingColors";
 static const string BITMAP_STRING_UNIFORM="bitmapText";
 
-//ofxShadersFX_LightingShader.cpp -----------------
-m_normalMatrix = ofMatrix4x4::getTransposedOf(m_cam->getModelViewMatrix().getInverse());
-m_shader.setUniformMatrix4f("normalMatrix", m_normalMatrix);
+//LightShaderManager.cpp -----------------
+normalMatrix = ofMatrix4x4::getTransposedOf(m_cam->getModelViewMatrix().getInverse());
+shader.setUniformMatrix4f("normalMatrix", normalMatrix);
+
+//----------------------------------------------------------
+// these are for the programmable pipeline system and are passed in
+// by default from OpenFrameworks
+uniform mat4 modelViewMatrix;
+uniform mat4 projectionMatrix;
+uniform mat4 textureMatrix;
+uniform mat4 modelViewProjectionMatrix;
+
+in vec4 position;
+in vec3 normal;
+in vec4 color;
+in vec2 texcoord;
+// this is the end of the default functionality

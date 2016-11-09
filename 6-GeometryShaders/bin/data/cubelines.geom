@@ -1,3 +1,5 @@
+// Copyright (C) 2016 Leo Zimmerman [http://www.leozimmerman.com.ar]
+
 #version 330
 
 layout(lines) in;

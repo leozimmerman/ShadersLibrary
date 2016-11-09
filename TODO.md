@@ -1,7 +1,4 @@
-#TODO List
+# TODO List
 
-## To add 
-
-- Vertex Displacemente + Noise
-
-
+- Add Vertex Displacement with noise.
+- Add Geometry Particles example.

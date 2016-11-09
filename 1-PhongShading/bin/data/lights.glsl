@@ -1,6 +1,4 @@
 
-//#version 330
-
 struct Light {
     vec4 position;
     vec4 ambient;

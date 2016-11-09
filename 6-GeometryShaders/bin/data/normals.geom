@@ -1,6 +1,6 @@
+//http://learnopengl.com/#!Advanced-OpenGL/Geometry-Shader
+
 #version 330
-
-
 
 layout(triangles) in;
 

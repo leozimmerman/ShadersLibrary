@@ -1,3 +1,10 @@
+# Lighting shaders
+
+Example with different types of lighting shading methods with materials and textures.
+
+* Shaders were taken from:https://github.com/Scylardor/ofxShadersFX
+* GLSL version: 330
+
 ## Gouraud shading
 https://en.wikipedia.org/wiki/Gouraud_shading
 

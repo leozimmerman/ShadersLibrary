@@ -1,3 +1,5 @@
+//https://github.com/McNopper/OpenGL/blob/master/Example10/shader/dublicate.geom.glsl
+
 #version 330
 
 

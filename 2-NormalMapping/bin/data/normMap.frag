@@ -1,3 +1,5 @@
+//https://github.com/McNopper/OpenGL/blob/master/Example07/shader/normmap.frag.glsl
+
 #version 150
 
 #pragma include "lights.glsl"

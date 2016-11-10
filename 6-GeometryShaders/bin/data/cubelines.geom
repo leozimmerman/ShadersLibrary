@@ -44,32 +44,32 @@ void main(void) {
     vec3 up = vec3(0, 0, 1);	// arbitrary up vector
     
     vec3 dir = normalize(p1 - p0);			// normalized direction vector from p0 to p1
-    vec3 ancho = normalize(cross(dir, up));	// ancho vector
-    vec3 norm = cross(ancho, dir);
+    vec3 width = normalize(cross(dir, up));	// width vector
+    vec3 norm = cross(width, dir);
     
-    vec3 alto = norm;
+    vec3 height = norm;
     vec3 normals[6] = vec3[6](normalize(dir),//front face - 0
-                               normalize(ancho),//right face - 1
-                               normalize(ancho * -1.),//left face - 2
+                               normalize(width),//right face - 1
+                               normalize(width * -1.),//left face - 2
                                normalize(dir * -1.),//back face - 3
-                               normalize(alto * -1.),//bottom face - 4
-                               normalize(alto)//top face - 5
+                               normalize(height * -1.),//bottom face - 4
+                               normalize(height)//top face - 5
                                );
     
-    ancho*= u_size;
-    alto *= u_size;
+    width*= u_size;
+    height *= u_size;
     
     //--------------------------------------------------------------------
     vec3 cubeVerts[8] = vec3[8](
-                                p0 - ancho - alto, //LB 0
-                                p0 - ancho + alto, //LT 1
-                                p0 + ancho - alto, //RB 2
-                                p0 + ancho + alto, //RT 3
+                                p0 - width - height, //LB 0
+                                p0 - width + height, //LT 1
+                                p0 + width - height, //RB 2
+                                p0 + width + height, //RT 3
                                 //back face
-                                p1 - ancho - alto, //LB 4
-                                p1 - ancho + alto, //LT 5
-                                p1 + ancho - alto, //RB 6
-                                p1 + ancho + alto//RT 7
+                                p1 - width - height, //LB 4
+                                p1 - width + height, //LT 5
+                                p1 + width - height, //RB 6
+                                p1 + width + height//RT 7
                                 );
     
     for (int j=0; j<6; j++) {
